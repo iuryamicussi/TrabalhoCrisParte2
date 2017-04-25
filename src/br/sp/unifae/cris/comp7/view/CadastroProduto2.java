@@ -11,12 +11,12 @@ import javax.swing.JFrame;
  *
  * @author iury
  */
-public class teste extends JFrame {
-    teste(){
-        
+public class CadastroProduto2 extends Template {
+    CadastroProduto2(){
+        this.setVisible(true);
     }
     
-    public static void main(String [] args){
-        new teste().setVisible(true);
-    }
+    /*public static void main(String [] args){
+        new CadastroProduto2().setVisible(true);
+    }*/
 }
