@@ -5,6 +5,8 @@
  */
 package br.sp.unifae.cris.comp7.view;
 
+import javax.swing.JLabel;
+
 /**
  *
  * @author iury
@@ -34,8 +36,11 @@ public class Template extends javax.swing.JFrame {
         jButtonCancelar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jPaneCampos = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setToolTipText("broncossauro");
 
         jButtonIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492797966_flat-style-circle-add.png"))); // NOI18N
         jButtonIncluir.setMnemonic('C');
@@ -85,16 +90,29 @@ public class Template extends javax.swing.JFrame {
         jButton1.getAccessibleContext().setAccessibleName("Pesquisar");
         jButton1.getAccessibleContext().setAccessibleDescription("Pesquisar registros");
 
+        javax.swing.GroupLayout jPaneCamposLayout = new javax.swing.GroupLayout(jPaneCampos);
+        jPaneCampos.setLayout(jPaneCamposLayout);
+        jPaneCamposLayout.setHorizontalGroup(
+            jPaneCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPaneCamposLayout.setVerticalGroup(
+            jPaneCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 347, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPaneCampos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(342, Short.MAX_VALUE)
+                .addComponent(jPaneCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -153,7 +171,8 @@ public class Template extends javax.swing.JFrame {
     public javax.swing.JButton jButtonExcluir;
     public javax.swing.JButton jButtonIncluir;
     public javax.swing.JButton jButtonSalvar;
-    public javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPaneCampos;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
