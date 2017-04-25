@@ -40,7 +40,7 @@ public class Template extends javax.swing.JFrame {
         jButtonIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492797966_flat-style-circle-add.png"))); // NOI18N
         jButtonIncluir.setMnemonic('C');
 
-        jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798158_circle-content-upload-cloud.png"))); // NOI18N
+        jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1493073460_flat-style-circle-save.png"))); // NOI18N
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798125_flat-style-circle-undo.png"))); // NOI18N
 
