@@ -7,8 +7,11 @@ package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.utils.Tela;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.text.DecimalFormat;
 import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +27,7 @@ public class CadastroProduto2 extends Template implements Tela {
     JLabel jLabelNome;
     JLabel jLabelPrecoCusto;
     JLabel jLabelPrecoVenda;
+    JLabel jLabelEstoquePanelCaption;
     JLabel jLabelEstoqueAnterior;
     JLabel jLabelEstoqueEntrada;
     JLabel jLabelEstoqueSaida;
@@ -49,32 +53,60 @@ public class CadastroProduto2 extends Template implements Tela {
     @Override
     public final void DesenharTela() {
         this.setTitle("Cadastro de Produtos");
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         
         jLabelCodigo = new JLabel("Código :");
-        jLabelCodigo.setBounds(20, 50, 100, 30);
+        jLabelCodigo.setBounds(20, 20, 60, 20);
+        jTextFieldCodigo = new JTextField("123456");
+        jTextFieldCodigo.setBounds(90,20,55, 20);
+        jTextFieldCodigo.setEditable(false);
+        
         jLabelNome = new JLabel("Nome :");
+        jLabelNome.setBounds(20, 60, 60, 20);
+        jTextFieldNome= new JTextField("");
+        jTextFieldNome.setBounds(90, 60, 350, 20);
+        
         jLabelPrecoCusto = new JLabel("Preço Custo :");
+        jLabelPrecoCusto.setBounds(20, 100, 120, 20);
+        jFormattedTextFieldPrecoCusto = new JFormattedTextField(DecimalFormat.getInstance());
+        jFormattedTextFieldPrecoCusto.setBounds(130,100,80, 20);
+        
         jLabelPrecoVenda = new JLabel("Preço Venda :");
+        jLabelPrecoVenda.setBounds(20, 140, 120, 20);
+        jFormattedTextFieldPrecoVenda = new JFormattedTextField(DecimalFormat.getInstance());
+        jFormattedTextFieldPrecoVenda.setBounds(130,140,80, 20);
         
         jPanelEstoque= new JPanel();
         jPanelEstoque.setBorder(BorderFactory.createLineBorder(Color.black));
+        jPanelEstoque.setBounds(20, 180, 420,150);
+        jPanelEstoque.setLayout(new GroupLayout(jPanelEstoque));
+        
+        jLabelEstoquePanelCaption = new JLabel("Informações de Estoque");
+        jLabelEstoquePanelCaption.setBounds(100, -5, 220, 30);
+        jLabelEstoquePanelCaption.setFont(new Font("Times New Roman",3,15));
         
         jLabelEstoqueAnterior = new JLabel("Anterior :");
-        jLabelEstoqueAnterior.setBounds(20, 50, 100, 30);
-        jLabelEstoqueEntrada = new JLabel("Entradas :");
-        jLabelEstoqueSaida = new JLabel("Saídas :");
-        jLabelEstoqueAtual = new JLabel("Atual :");
-        
-        jTextFieldCodigo = new JTextField("123456");
-        jTextFieldCodigo.setBounds(20,100,50, 30);
-        jTextFieldNome= new JTextField("1234567890123456789012345678901234567890");
-        
-        jFormattedTextFieldPrecoCusto = new JFormattedTextField(DecimalFormat.getInstance());
-        jFormattedTextFieldPrecoVenda = new JFormattedTextField(DecimalFormat.getInstance());
+        jLabelEstoqueAnterior.setBounds(20, 20, 100, 30);
         jFormattedTextFieldEstoqueAnterior = new JFormattedTextField(DecimalFormat.getInstance());
+        jFormattedTextFieldEstoqueAnterior.setBounds(100,27,80, 20);
+        
+        jLabelEstoqueEntrada = new JLabel("Entradas :");
+        jLabelEstoqueEntrada.setBounds(20, 60, 100, 30);
         jFormattedTextFieldEstoqueEntrada = new JFormattedTextField(DecimalFormat.getInstance());
+        jFormattedTextFieldEstoqueEntrada.setBounds(100,65,80, 20);
+        
+        jLabelEstoqueSaida = new JLabel("Saídas :");
+        jLabelEstoqueSaida.setBounds(220, 60, 100, 30);
         jFormattedTextFieldEstoqueSaida = new JFormattedTextField(DecimalFormat.getInstance());
+        jFormattedTextFieldEstoqueSaida.setBounds(290,65,80, 20);
+        
+        jLabelEstoqueAtual = new JLabel("Atual :");
+        jLabelEstoqueAtual.setBounds(220, 110, 100, 30);
         jFormattedTextFieldEstoqueAtual = new JFormattedTextField(DecimalFormat.getInstance());
+        jFormattedTextFieldEstoqueAtual.setBounds(290,115,80, 20);
+
+        jPanelEstoque.add(jLabelEstoquePanelCaption);
         
         jPanelEstoque.add(jLabelEstoqueAnterior);
         jPanelEstoque.add(jFormattedTextFieldEstoqueAnterior);
@@ -106,5 +138,6 @@ public class CadastroProduto2 extends Template implements Tela {
         this.jPaneCampos.add(jFormattedTextFieldPrecoVenda);
         
         this.jPaneCampos.add(jPanelEstoque);
+        
     }
 }

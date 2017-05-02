@@ -5,7 +5,7 @@
  */
 package br.sp.unifae.cris.comp7.view;
 
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,7 +40,7 @@ public class Template extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setToolTipText("broncossauro");
+        jPanel1.setToolTipText("");
 
         jButtonIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492797966_flat-style-circle-add.png"))); // NOI18N
         jButtonIncluir.setMnemonic('C');
@@ -72,19 +72,16 @@ public class Template extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButtonExcluir))
-                .addGap(25, 25, 25))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonCancelar)
-                    .addComponent(jButtonSalvar)
-                    .addComponent(jButtonIncluir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton1)
+                        .addComponent(jButtonExcluir))
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonSalvar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonIncluir, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(20, 20, 20))
         );
 
         jButton1.getAccessibleContext().setAccessibleName("Pesquisar");
