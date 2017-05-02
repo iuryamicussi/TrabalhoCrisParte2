@@ -1,7 +1,7 @@
 # TrabalhoCrisParte2
 Segunda parte do projeto da disciplina de POO3 , professora Cristiane. Eng.Comp 7º Sem.
 
-Welcome to the TrabalhoCrisParte2 wiki!
+Welcome to the TrabalhoCrisParte2!
 
 This repo was designed to gather all the codes of our second assignment as a student of 
 the seventh period of Computer Engineering at FAE in Orientated Program Language III course with 
