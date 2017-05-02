@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/05/2017 22:04:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="br.sp.unifae.cris.comp7.model.Estado" table="estado" catalog="loja" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="sigla" type="string">
+            <column name="sigla" length="2" />
+        </property>
+        <property name="nome" type="string">
+            <column name="nome" length="45" />
+        </property>
+        <set name="fornecedors" table="fornecedor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="estado" />
+            </key>
+            <one-to-many class="br.sp.unifae.cris.comp7.model.Fornecedor" />
+        </set>
+        <set name="clientes" table="cliente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="estado" />
+            </key>
+            <one-to-many class="br.sp.unifae.cris.comp7.model.Cliente" />
+        </set>
+    </class>
+</hibernate-mapping>

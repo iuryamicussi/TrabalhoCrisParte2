@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/05/2017 22:04:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="br.sp.unifae.cris.comp7.model.EntradaProduto" table="entrada_produto" catalog="loja" optimistic-lock="version">
+        <composite-id name="id" class="br.sp.unifae.cris.comp7.model.EntradaProdutoId">
+            <key-property name="idEntrada" type="int">
+                <column name="id_entrada" />
+            </key-property>
+            <key-property name="item" type="int">
+                <column name="item" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="entrada" class="br.sp.unifae.cris.comp7.model.Entrada" update="false" insert="false" fetch="select">
+            <column name="id_entrada" not-null="true" />
+        </many-to-one>
+        <many-to-one name="produto" class="br.sp.unifae.cris.comp7.model.Produto" fetch="select">
+            <column name="produto" />
+        </many-to-one>
+        <property name="quantidade" type="java.lang.Float">
+            <column name="quantidade" precision="12" scale="0" />
+        </property>
+        <property name="preco" type="java.lang.Float">
+            <column name="preco" precision="12" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

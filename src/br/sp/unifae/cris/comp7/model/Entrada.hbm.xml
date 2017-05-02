@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/05/2017 22:04:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="br.sp.unifae.cris.comp7.model.Entrada" table="entrada" catalog="loja" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="foreign">
+                <param name="property">fornecedor</param>
+            </generator>
+        </id>
+        <one-to-one name="fornecedor" class="br.sp.unifae.cris.comp7.model.Fornecedor" constrained="true"></one-to-one>
+        <property name="fornecedor_1" type="java.lang.Integer">
+            <column name="fornecedor" />
+        </property>
+        <property name="precoTotal" type="java.lang.Float">
+            <column name="precoTotal" precision="12" scale="0" />
+        </property>
+        <set name="entradaProdutos" table="entrada_produto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_entrada" not-null="true" />
+            </key>
+            <one-to-many class="br.sp.unifae.cris.comp7.model.EntradaProduto" />
+        </set>
+    </class>
+</hibernate-mapping>

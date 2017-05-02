@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/05/2017 22:04:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="br.sp.unifae.cris.comp7.model.Cliente" table="cliente" catalog="loja" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="estado" class="br.sp.unifae.cris.comp7.model.Estado" fetch="select">
+            <column name="estado" />
+        </many-to-one>
+        <property name="nome" type="string">
+            <column name="nome" length="70" />
+        </property>
+        <property name="fisicaOuJuridica" type="string">
+            <column name="fisicaOuJuridica" length="1" />
+        </property>
+        <property name="cpfOuCnpj" type="string">
+            <column name="cpfOuCnpj" length="45" />
+        </property>
+        <property name="endereco" type="string">
+            <column name="endereco" length="80" />
+        </property>
+        <property name="cidade" type="string">
+            <column name="cidade" length="45" />
+        </property>
+        <set name="vendas" table="venda" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cliente" />
+            </key>
+            <one-to-many class="br.sp.unifae.cris.comp7.model.Venda" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/05/2017 22:04:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="br.sp.unifae.cris.comp7.model.Venda" table="venda" catalog="loja" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cliente" class="br.sp.unifae.cris.comp7.model.Cliente" fetch="select">
+            <column name="cliente" />
+        </many-to-one>
+        <many-to-one name="formapagamento" class="br.sp.unifae.cris.comp7.model.Formapagamento" fetch="select">
+            <column name="formaPagamento" />
+        </many-to-one>
+        <property name="totalVenda" type="java.lang.Float">
+            <column name="totalVenda" precision="12" scale="0" />
+        </property>
+        <set name="vendaProdutos" table="venda_produto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_venda" not-null="true" />
+            </key>
+            <one-to-many class="br.sp.unifae.cris.comp7.model.VendaProduto" />
+        </set>
+    </class>
+</hibernate-mapping>
