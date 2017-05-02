@@ -7,9 +7,9 @@ This repo was designed to gather all the codes of our second assignment as a stu
 the seventh period of Computer Engineering at FAE in Orientated Program Language III course with 
 the teacher Cristiane Yae Mi Imamura.
 
-It is a simple project which contemplates three register forms(Customer, Suplier and Product).
+It is a simple project which contemplates three register forms(Customer, Supplier and Product).
 There is a stock entry screen and a sales screen.
 
-The folder Dump gathers all files needed to create a MySql database to use with this project.
+The folder Dump gathers all files needed to create MySql database to use with this project.
 
 Hope you Enjoy.
