@@ -5,6 +5,14 @@
  */
 package br.sp.unifae.cris.comp7.view;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author iury
@@ -14,9 +22,9 @@ public class Pesquisa extends javax.swing.JFrame {
     /**
      * Creates new form Pesquisa
      */
-    public Pesquisa() {
+    public Pesquisa(Class classe) {
         initComponents();
-        
+        personalizar(classe);
     }
 
     /**
@@ -32,16 +40,7 @@ public class Pesquisa extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jPanel1.setLayout(new java.awt.GridLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,4 +94,65 @@ public class Pesquisa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private void personalizar(Class classe) {
+        //headers for the table
+        String[] columns = new String[]{
+            "Id", "Name", "Hourly Rate", "Part Time"
+        };
+
+        //actual data for the table in a 2d array
+        Object[][] data = new Object[][]{
+            {1, "John", 40.0, false},
+            {2, "Rambo", 70.0, false},
+            {3, "Zorro", 60.0, true},};
+
+        final Class[] columnClass = new Class[]{
+            Integer.class, String.class, Double.class, Boolean.class
+        };
+        //create table model with data
+        DefaultTableModel model = new DefaultTableModel(data, columns) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return columnClass[columnIndex];
+            }
+        };
+        
+        Object obj = null;
+        Class<?> c = null;
+        try {
+            c = Class.forName(classe.getName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Pesquisa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Method  method = null;
+        try {
+            method = c.getDeclaredMethod ("listar");
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(Pesquisa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(Pesquisa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            method.invoke (obj);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Pesquisa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(Pesquisa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(Pesquisa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        JTable table = new JTable(model);
+        table.setBounds(10, 10, 422, 422);
+        //add the table to the frame
+        jPanel1.add(new JScrollPane(table));
+        this.setSize(400, 400);
+        this.setVisible(true);
+    }
 }

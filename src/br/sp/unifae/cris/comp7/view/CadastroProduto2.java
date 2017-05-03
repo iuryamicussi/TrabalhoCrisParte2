@@ -6,9 +6,6 @@
 package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.utils.Tela;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.text.DecimalFormat;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -27,7 +24,6 @@ public class CadastroProduto2 extends Template implements Tela {
     JLabel jLabelNome;
     JLabel jLabelPrecoCusto;
     JLabel jLabelPrecoVenda;
-    JLabel jLabelEstoquePanelCaption;
     JLabel jLabelEstoqueAnterior;
     JLabel jLabelEstoqueEntrada;
     JLabel jLabelEstoqueSaida;
@@ -58,7 +54,7 @@ public class CadastroProduto2 extends Template implements Tela {
         
         jLabelCodigo = new JLabel("Código :");
         jLabelCodigo.setBounds(20, 20, 60, 20);
-        jTextFieldCodigo = new JTextField("123456");
+        jTextFieldCodigo = new JTextField("");
         jTextFieldCodigo.setBounds(90,20,55, 20);
         jTextFieldCodigo.setEditable(false);
         
@@ -78,13 +74,9 @@ public class CadastroProduto2 extends Template implements Tela {
         jFormattedTextFieldPrecoVenda.setBounds(130,140,80, 20);
         
         jPanelEstoque= new JPanel();
-        jPanelEstoque.setBorder(BorderFactory.createLineBorder(Color.black));
+        jPanelEstoque.setBorder(BorderFactory.createTitledBorder("Informações de Estoque"));
         jPanelEstoque.setBounds(20, 180, 420,150);
         jPanelEstoque.setLayout(new GroupLayout(jPanelEstoque));
-        
-        jLabelEstoquePanelCaption = new JLabel("Informações de Estoque");
-        jLabelEstoquePanelCaption.setBounds(100, -5, 220, 30);
-        jLabelEstoquePanelCaption.setFont(new Font("Times New Roman",3,15));
         
         jLabelEstoqueAnterior = new JLabel("Anterior :");
         jLabelEstoqueAnterior.setBounds(20, 20, 100, 30);
@@ -106,8 +98,6 @@ public class CadastroProduto2 extends Template implements Tela {
         jFormattedTextFieldEstoqueAtual = new JFormattedTextField(DecimalFormat.getInstance());
         jFormattedTextFieldEstoqueAtual.setBounds(290,115,80, 20);
 
-        jPanelEstoque.add(jLabelEstoquePanelCaption);
-        
         jPanelEstoque.add(jLabelEstoqueAnterior);
         jPanelEstoque.add(jFormattedTextFieldEstoqueAnterior);
         
@@ -140,4 +130,6 @@ public class CadastroProduto2 extends Template implements Tela {
         this.jPaneCampos.add(jPanelEstoque);
         
     }
+    
+    
 }

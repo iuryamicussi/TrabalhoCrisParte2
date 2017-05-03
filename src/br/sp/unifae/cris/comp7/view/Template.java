@@ -52,6 +52,11 @@ public class Template extends javax.swing.JFrame {
         jButtonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798109_flat-style-circle-delete-trash.png"))); // NOI18N
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798187_circle-edit-search.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -127,6 +132,10 @@ public class Template extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //pesquisar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -172,4 +181,8 @@ public class Template extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
+    private void pesquisar() {
+        //new Pesquisa();
+    }
 }

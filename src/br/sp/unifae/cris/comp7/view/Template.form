@@ -146,6 +146,9 @@
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Pesquisar"/>
                 <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Pesquisar registros"/>
               </AccessibilityProperties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
