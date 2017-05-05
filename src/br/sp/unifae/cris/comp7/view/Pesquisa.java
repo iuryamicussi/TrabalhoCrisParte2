@@ -5,10 +5,9 @@
  */
 package br.sp.unifae.cris.comp7.view;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import br.sp.unifae.cris.comp7.model.Produto;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -21,10 +20,14 @@ public class Pesquisa extends javax.swing.JFrame {
 
     /**
      * Creates new form Pesquisa
+     * @param classe
      */
-    public Pesquisa(Class classe) {
+    public Pesquisa(Object classe) {
         initComponents();
         personalizar(classe);
+    }
+
+    private Pesquisa() {
     }
 
     /**
@@ -40,17 +43,17 @@ public class Pesquisa extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
         );
 
         pack();
@@ -95,21 +98,25 @@ public class Pesquisa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    private void personalizar(Class classe) {
-        //headers for the table
-        String[] columns = new String[]{
-            "Id", "Name", "Hourly Rate", "Part Time"
-        };
-
-        //actual data for the table in a 2d array
-        Object[][] data = new Object[][]{
+    private void personalizar(Object classe) {
+        
+        List lista = null;
+        String[] columns = null;
+        Object[][] data = null;
+        if (classe instanceof Produto){
+            lista = ((Produto)classe).listar();
+            columns = new String[]{"Código", "Nome"};
+            data = new Object[][]{
             {1, "John", 40.0, false},
             {2, "Rambo", 70.0, false},
-            {3, "Zorro", 60.0, true},};
-
-        final Class[] columnClass = new Class[]{
-            Integer.class, String.class, Double.class, Boolean.class
-        };
+            {3, "Zorro", 60.0, true},
+            };
+            for (Iterator it = lista.iterator(); it.hasNext();) {
+                Produto cliente = (Produto) it.next();
+                data
+            }
+        }
+        final Class[] columnClass = new Class[]{Integer.class, String.class};
         //create table model with data
         DefaultTableModel model = new DefaultTableModel(data, columns) {
             @Override
@@ -122,32 +129,7 @@ public class Pesquisa extends javax.swing.JFrame {
                 return columnClass[columnIndex];
             }
         };
-        
-        Object obj = null;
-        Class<?> c = null;
-        try {
-            c = Class.forName(classe.getName());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Pesquisa.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Method  method = null;
-        try {
-            method = c.getDeclaredMethod ("listar");
-        } catch (NoSuchMethodException ex) {
-            Logger.getLogger(Pesquisa.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
-            Logger.getLogger(Pesquisa.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            method.invoke (obj);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Pesquisa.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(Pesquisa.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(Pesquisa.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+
         JTable table = new JTable(model);
         table.setBounds(10, 10, 422, 422);
         //add the table to the frame

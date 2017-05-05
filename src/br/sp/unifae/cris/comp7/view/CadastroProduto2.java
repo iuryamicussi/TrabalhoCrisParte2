@@ -5,6 +5,7 @@
  */
 package br.sp.unifae.cris.comp7.view;
 
+import br.sp.unifae.cris.comp7.model.Produto;
 import br.sp.unifae.cris.comp7.utils.Tela;
 import java.text.DecimalFormat;
 import javax.swing.BorderFactory;
@@ -42,6 +43,7 @@ public class CadastroProduto2 extends Template implements Tela {
     
     CadastroProduto2(){
         DesenharTela();
+        this.setClasse(new Produto());
         this.setVisible(true);
     }
     
@@ -128,7 +130,6 @@ public class CadastroProduto2 extends Template implements Tela {
         this.jPaneCampos.add(jFormattedTextFieldPrecoVenda);
         
         this.jPaneCampos.add(jPanelEstoque);
-        
     }
     
     

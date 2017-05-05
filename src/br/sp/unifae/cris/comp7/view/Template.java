@@ -13,6 +13,11 @@ import javax.swing.JOptionPane;
  */
 public class Template extends javax.swing.JFrame {
 
+    private Object classe = null;
+
+    public void setClasse(Object classe) {
+        this.classe = classe;
+    }
     /**
      * Creates new form Template
      */
@@ -133,7 +138,7 @@ public class Template extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //pesquisar();
+        pesquisar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -183,6 +188,6 @@ public class Template extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void pesquisar() {
-        //new Pesquisa();
+        new Pesquisa(classe);
     }
 }
