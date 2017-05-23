@@ -6,8 +6,12 @@
 package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.model.Produto;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -16,12 +20,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author iury
  */
-public class Pesquisa extends javax.swing.JFrame {
+public class Pesquisa extends javax.swing.JDialog {
 
     /**
      * Creates new form Pesquisa
      * @param classe
      */
+    JTable table = null;
     public Pesquisa(Object classe) {
         initComponents();
         personalizar(classe);
@@ -41,7 +46,7 @@ public class Pesquisa extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -106,16 +111,16 @@ public class Pesquisa extends javax.swing.JFrame {
         if (classe instanceof Produto){
             lista = ((Produto)classe).listar();
             columns = new String[]{"Código", "Nome"};
-            data = new Object[][]{
-            {1, "John", 40.0, false},
-            {2, "Rambo", 70.0, false},
-            {3, "Zorro", 60.0, true},
-            };
+            data = new Object[lista.size()][2];
+            int i =0;
             for (Iterator it = lista.iterator(); it.hasNext();) {
-                Produto cliente = (Produto) it.next();
-                data
+                Produto produto = (Produto) it.next();
+                data[i][0] = produto.getId();
+                data[i][1] = produto.getNome();
+                i++;
             }
         }
+        if (lista.size() <= 0 || lista == null) Pesquisa.this.dispose();
         final Class[] columnClass = new Class[]{Integer.class, String.class};
         //create table model with data
         DefaultTableModel model = new DefaultTableModel(data, columns) {
@@ -128,13 +133,38 @@ public class Pesquisa extends javax.swing.JFrame {
             public Class<?> getColumnClass(int columnIndex) {
                 return columnClass[columnIndex];
             }
+            
+            
         };
 
-        JTable table = new JTable(model);
+        table = new JTable(model);
         table.setBounds(10, 10, 422, 422);
+        
+        //Evento de doubleClick na Tabela
+        table.addMouseListener(new MouseListener() {
+                    public void mouseClicked(MouseEvent e) {
+                    }
+                    public void mousePressed(MouseEvent e) {
+                        int row = table.rowAtPoint(e.getPoint());
+                        int col = table.columnAtPoint(e.getPoint());
+                        if (row < 0 || col < 0) return;
+                        if (e.getClickCount() == 2) {
+                            Template.id = table.getModel().getValueAt(row,0);
+                            Pesquisa.this.dispose();
+                        }
+                    }
+                    public void mouseReleased(MouseEvent e) {
+                    }
+                    public void mouseEntered(MouseEvent e) {
+                    }
+                    public void mouseExited(MouseEvent e) {
+                    }
+                });
+        
+        
         //add the table to the frame
         jPanel1.add(new JScrollPane(table));
         this.setSize(400, 400);
-        this.setVisible(true);
+       // this.setVisible(true);
     }
 }

@@ -6,8 +6,11 @@
 package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.model.Produto;
+import br.sp.unifae.cris.comp7.utils.Generica;
 import br.sp.unifae.cris.comp7.utils.Tela;
 import java.text.DecimalFormat;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JFormattedTextField;
@@ -20,6 +23,8 @@ import javax.swing.JTextField;
  * @author iury
  */
 public class CadastroProduto2 extends Template implements Tela {
+    
+    private List produtos = null;
     
     JLabel jLabelCodigo;
     JLabel jLabelNome;
@@ -43,8 +48,17 @@ public class CadastroProduto2 extends Template implements Tela {
     
     CadastroProduto2(){
         DesenharTela();
-        this.setClasse(new Produto());
+        
+        Object obj = new Produto();
+        produtos = ((Produto)obj).listar();
+        
+        this.setClasse(obj);
         this.setVisible(true);
+        
+        if(produtos.size() > 0)
+        {
+            pesquisar();
+        }
     }
     
 
@@ -132,5 +146,24 @@ public class CadastroProduto2 extends Template implements Tela {
         this.jPaneCampos.add(jPanelEstoque);
     }
     
-    
+//    @Override
+      public Object pesquisar()
+      {
+          Object retorno = null;
+          retorno = super.pesquisar();
+          PreencherCampos(retorno);
+          return null;
+      }
+
+    @Override
+    public void PreencherCampos(Object obj) {
+        Produto produto;
+        Generica.Limpar_Campos_Tela(this);
+        for (Iterator it = produtos.iterator(); it.hasNext();) {
+            produto = (Produto)it.next();
+            if(produto.getId().equals(obj)){
+                
+            }
+        }
+    }
 }

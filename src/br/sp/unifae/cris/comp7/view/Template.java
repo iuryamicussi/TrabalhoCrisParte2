@@ -5,6 +5,7 @@
  */
 package br.sp.unifae.cris.comp7.view;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,10 +15,12 @@ import javax.swing.JOptionPane;
 public class Template extends javax.swing.JFrame {
 
     private Object classe = null;
+    public static Object id = null;
 
     public void setClasse(Object classe) {
         this.classe = classe;
     }
+
     /**
      * Creates new form Template
      */
@@ -187,7 +190,13 @@ public class Template extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
-    private void pesquisar() {
-        new Pesquisa(classe);
+    public Object pesquisar() {
+        Template.id = null;
+        
+        Pesquisa janela = new Pesquisa(classe);
+        janela.setModal(true);
+        janela.setVisible(true);
+        
+        return Template.id;
     }
 }

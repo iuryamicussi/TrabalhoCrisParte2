@@ -80,11 +80,12 @@ public class DAOProduto {
         try {
  
             session.beginTransaction();           
-            listaProdutos = session.createQuery("From Cliente").list();
+            listaProdutos = session.createQuery("From Produto").list();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
         finally{
+            session.close();
             return listaProdutos;
         }
     }

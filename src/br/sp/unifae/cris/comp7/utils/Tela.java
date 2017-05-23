@@ -11,4 +11,5 @@ package br.sp.unifae.cris.comp7.utils;
  */
 public interface Tela {
     void DesenharTela();
+    void PreencherCampos(Object obj);
 }
