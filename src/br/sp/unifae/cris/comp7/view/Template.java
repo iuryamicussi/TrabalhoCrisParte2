@@ -5,6 +5,9 @@
  */
 package br.sp.unifae.cris.comp7.view;
 
+import br.sp.unifae.cris.comp7.utils.Generica;
+import br.sp.unifae.cris.comp7.utils.interfaces.IMetodosBasicosTemplate;
+import java.awt.event.KeyEvent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -12,10 +15,11 @@ import javax.swing.JOptionPane;
  *
  * @author iury
  */
-public class Template extends javax.swing.JFrame {
+public class Template extends javax.swing.JFrame implements IMetodosBasicosTemplate{
 
     private Object classe = null;
     public static Object id = null;
+    public boolean isNovo = false;
 
     public void setClasse(Object classe) {
         this.classe = classe;
@@ -26,6 +30,7 @@ public class Template extends javax.swing.JFrame {
      */
     public Template() {
         initComponents();
+        Personalizar();
     }
 
     /**
@@ -43,26 +48,50 @@ public class Template extends javax.swing.JFrame {
         jButtonSalvar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonPesquisar = new javax.swing.JButton();
         jPaneCampos = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jPanel1.setToolTipText("");
 
         jButtonIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492797966_flat-style-circle-add.png"))); // NOI18N
-        jButtonIncluir.setMnemonic('C');
+        jButtonIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIncluirActionPerformed(evt);
+            }
+        });
 
         jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1493073460_flat-style-circle-save.png"))); // NOI18N
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798125_flat-style-circle-undo.png"))); // NOI18N
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jButtonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798109_flat-style-circle-delete-trash.png"))); // NOI18N
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798187_circle-edit-search.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
+
+        jButtonPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798187_circle-edit-search.png"))); // NOI18N
+        jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPesquisarActionPerformed(evt);
             }
         });
 
@@ -80,7 +109,7 @@ public class Template extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonExcluir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jButtonPesquisar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -89,7 +118,7 @@ public class Template extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton1)
+                        .addComponent(jButtonPesquisar)
                         .addComponent(jButtonExcluir))
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonSalvar, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -97,8 +126,8 @@ public class Template extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        jButton1.getAccessibleContext().setAccessibleName("Pesquisar");
-        jButton1.getAccessibleContext().setAccessibleDescription("Pesquisar registros");
+        jButtonPesquisar.getAccessibleContext().setAccessibleName("Pesquisar");
+        jButtonPesquisar.getAccessibleContext().setAccessibleDescription("Pesquisar registros");
 
         javax.swing.GroupLayout jPaneCamposLayout = new javax.swing.GroupLayout(jPaneCampos);
         jPaneCampos.setLayout(jPaneCamposLayout);
@@ -140,9 +169,29 @@ public class Template extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         pesquisar();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonPesquisarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        cancelar();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        excluir();
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
+        incluir();
+    }//GEN-LAST:event_jButtonIncluirActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        salvar();
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        teclaPressionada(evt);
+    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments
@@ -180,23 +229,76 @@ public class Template extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton jButton1;
     public javax.swing.JButton jButtonCancelar;
     public javax.swing.JButton jButtonExcluir;
     public javax.swing.JButton jButtonIncluir;
+    public javax.swing.JButton jButtonPesquisar;
     public javax.swing.JButton jButtonSalvar;
     public javax.swing.JPanel jPaneCampos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
+    @Override
     public Object pesquisar() {
         Template.id = null;
         
         Pesquisa janela = new Pesquisa(classe);
         janela.setModal(true);
+        janela.setLocationRelativeTo(null);
         janela.setVisible(true);
-        
+        isNovo = false;
+            
         return Template.id;
+    }
+
+    @Override
+    public void cancelar() {
+        Generica.Limpar_Campos_Tela(jPaneCampos,true);
+        isNovo = false;
+    }
+
+    @Override
+    public void excluir() {
+        isNovo = false;
+        PopularListaDeRegistros();
+    }
+
+    @Override
+    public void salvar() {
+        isNovo = false;
+        PopularListaDeRegistros();
+    }
+
+    @Override
+    public void incluir() {
+        Generica.Limpar_Campos_Tela(jPaneCampos,false);
+        isNovo = true;
+    }
+    
+    public void PopularListaDeRegistros(){
+        
+    }
+
+    private void Personalizar() {
+        jPaneCampos.addKeyListener(null);
+    }
+    
+    public void teclaPressionada(java.awt.event.KeyEvent evt){
+        if(evt.getKeyCode() == KeyEvent.VK_F4){
+            salvar();
+        }
+        if(evt.getKeyCode() == KeyEvent.VK_F2){
+            incluir();
+        }
+        if(evt.getKeyCode() == KeyEvent.VK_F5){
+            cancelar();
+        }
+        if(evt.getKeyCode() == KeyEvent.VK_F8){
+            excluir();
+        }
+        if(evt.getKeyCode() == KeyEvent.VK_F6){
+            pesquisar();
+        }
     }
 }

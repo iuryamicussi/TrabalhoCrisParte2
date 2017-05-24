@@ -19,14 +19,13 @@ public class DAOProduto {
     
     public void armazenar(Produto produto) {
  
-        // AGORA É PRECISO ENVIAR O cliente PARA o BD
-        // ASSIM, CRIA-SE UMA SESSÃO PARA ISTO
+
         Session session = DAOHibernateUtil.getSessionFactory().getCurrentSession();
  
         try {
  
             session.beginTransaction(); // Abre-se uma transação
-            session.save(produto);      // Acumula a operação de gravação do objeto cliente no BD, na transação
+            session.save(produto);      // Acumula a operação de gravação do objeto produto no BD, na transação
             session.getTransaction().commit();   // Realiza definitivamente todas as operações pendentes na transação
             JOptionPane.showMessageDialog(null, "Produto armazenado com sucesso");
  
@@ -38,14 +37,12 @@ public class DAOProduto {
  
     public void alterar(Produto produto) {
  
-        // VAMOS ATUALIZAR O cliente PARA o BD
-        // ASSIM, CRIA-SE UMA SESSÃO PARA ISTO
         Session session = DAOHibernateUtil.getSessionFactory().getCurrentSession();
  
         try {
  
             session.beginTransaction(); // Abre-se uma transação
-            session.merge(produto);      // Acumula a operação de alteração do objeto cliente no BD, na transação
+            session.merge(produto);      // Acumula a operação de alteração do objeto produto no BD, na transação
             session.getTransaction().commit();   // Realiza definitivamente todas as operações pendentes na transação
             JOptionPane.showMessageDialog(null, "Produto alterado com sucesso");
  
@@ -57,14 +54,12 @@ public class DAOProduto {
  
     public void excluir(Produto produto) {
  
-        // VAMOS EXCLUIR O cliente do BD
-        // ASSIM, CRIA-SE UMA SESSÃO PARA ISTO
         Session session = DAOHibernateUtil.getSessionFactory().getCurrentSession();
  
         try {
  
             session.beginTransaction(); // Abre-se uma transação
-            session.delete(produto);    // Acumula a operação de exclusão do objeto cliente no BD, na transação
+            session.delete(produto);    // Acumula a operação de exclusão do objeto produto no BD, na transação
             session.getTransaction().commit();   // Realiza definitivamente todas as operações pendentes na transação
             JOptionPane.showMessageDialog(null, "Produto excluído com sucesso");
  
