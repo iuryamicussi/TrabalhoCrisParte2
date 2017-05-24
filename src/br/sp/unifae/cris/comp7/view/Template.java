@@ -7,6 +7,8 @@ package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.utils.Generica;
 import br.sp.unifae.cris.comp7.utils.interfaces.IMetodosBasicosTemplate;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -61,6 +63,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
         jPanel1.setToolTipText("");
 
         jButtonIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492797966_flat-style-circle-add.png"))); // NOI18N
+        jButtonIncluir.setToolTipText("[F2] - Incluir");
         jButtonIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonIncluirActionPerformed(evt);
@@ -68,6 +71,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
         });
 
         jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1493073460_flat-style-circle-save.png"))); // NOI18N
+        jButtonSalvar.setToolTipText("[F4] - Salvar");
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSalvarActionPerformed(evt);
@@ -75,6 +79,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
         });
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798125_flat-style-circle-undo.png"))); // NOI18N
+        jButtonCancelar.setToolTipText("[F5] - Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
@@ -82,6 +87,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
         });
 
         jButtonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798109_flat-style-circle-delete-trash.png"))); // NOI18N
+        jButtonExcluir.setToolTipText("[F8] - Excluir");
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExcluirActionPerformed(evt);
@@ -89,6 +95,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
         });
 
         jButtonPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798187_circle-edit-search.png"))); // NOI18N
+        jButtonPesquisar.setToolTipText("[F6] - Pesquisar");
         jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPesquisarActionPerformed(evt);
@@ -248,6 +255,11 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
         janela.setLocationRelativeTo(null);
         janela.setVisible(true);
         isNovo = false;
+        
+        if(Template.id != null)
+            controlaBotoesEmAlteracao();
+        else
+            controlaBotoesAIncluir();
             
         return Template.id;
     }
@@ -256,24 +268,32 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
     public void cancelar() {
         Generica.Limpar_Campos_Tela(jPaneCampos,true);
         isNovo = false;
+        
+        controlaBotoesAIncluir();
     }
 
     @Override
     public void excluir() {
         isNovo = false;
         PopularListaDeRegistros();
+        
+        controlaBotoesAIncluir();
     }
 
     @Override
     public void salvar() {
         isNovo = false;
         PopularListaDeRegistros();
+        
+        controlaBotoesAIncluir();
     }
 
     @Override
     public void incluir() {
         Generica.Limpar_Campos_Tela(jPaneCampos,false);
         isNovo = true;
+        
+        controlaBotoesEmInclusao();
     }
     
     public void PopularListaDeRegistros(){
@@ -281,10 +301,18 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
     }
 
     private void Personalizar() {
-        jPaneCampos.addKeyListener(null);
+        KeyboardFocusManager.getCurrentKeyboardFocusManager()
+        .addKeyEventDispatcher(new KeyEventDispatcher() {
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent e) {
+              teclaPressionada(e);
+              return false;
+            }
+      });
     }
     
     public void teclaPressionada(java.awt.event.KeyEvent evt){
+        
         if(evt.getKeyCode() == KeyEvent.VK_F4){
             salvar();
         }
@@ -300,5 +328,32 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
         if(evt.getKeyCode() == KeyEvent.VK_F6){
             pesquisar();
         }
+    }
+
+    private void controlaBotoesAIncluir() {
+        jButtonIncluir.setVisible(true);
+        jButtonPesquisar.setVisible(true);
+        
+        jButtonCancelar.setVisible(false);
+        jButtonSalvar.setVisible(false);
+        jButtonExcluir.setVisible(false);
+    }
+    
+    private void controlaBotoesEmInclusao(){
+        jButtonCancelar.setVisible(true);
+        jButtonSalvar.setVisible(true);
+        
+        jButtonIncluir.setVisible(false);
+        jButtonPesquisar.setVisible(false);
+        jButtonExcluir.setVisible(false);
+    }
+    
+    private void controlaBotoesEmAlteracao(){
+        jButtonCancelar.setVisible(true);
+        jButtonSalvar.setVisible(true);
+        jButtonExcluir.setVisible(true);
+        
+        jButtonIncluir.setVisible(false);
+        jButtonPesquisar.setVisible(false);
     }
 }
