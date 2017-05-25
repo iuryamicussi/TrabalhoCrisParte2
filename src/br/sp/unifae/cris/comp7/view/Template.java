@@ -9,6 +9,7 @@ import br.sp.unifae.cris.comp7.utils.Generica;
 import br.sp.unifae.cris.comp7.utils.interfaces.IMetodosBasicosTemplate;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -194,6 +195,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         salvar();
+        
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
@@ -285,6 +287,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
         isNovo = false;
         PopularListaDeRegistros();
         
+        Generica.Limpar_Campos_Tela(jPaneCampos,true);
         controlaBotoesAIncluir();
     }
 
@@ -314,18 +317,28 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
     public void teclaPressionada(java.awt.event.KeyEvent evt){
         
         if(evt.getKeyCode() == KeyEvent.VK_F4){
+            if(!jButtonSalvar.isVisible())
+                return;
             salvar();
         }
         if(evt.getKeyCode() == KeyEvent.VK_F2){
+            if(!jButtonIncluir.isVisible())
+                return;
             incluir();
         }
         if(evt.getKeyCode() == KeyEvent.VK_F5){
+            if(!jButtonCancelar.isVisible())
+                return;
             cancelar();
         }
         if(evt.getKeyCode() == KeyEvent.VK_F8){
+            if(!jButtonExcluir.isVisible())
+                return;
             excluir();
         }
         if(evt.getKeyCode() == KeyEvent.VK_F6){
+            if(!jButtonPesquisar.isVisible())
+                return;
             pesquisar();
         }
     }
