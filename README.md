@@ -10,6 +10,6 @@ the teacher Cristiane Yae Mi Imamura.
 It is a simple project which contemplates three register forms(Customer, Supplier and Product).
 There is a stock entry screen and a sales screen.
 
-The folder Dump gathers all files needed to create MySql database to use with this project.
+The folder [Bancos-MySql](https://github.com/iuryamicussi/TrabalhoCrisParte2/tree/master/Bancos-MySql) gathers all files needed to create MySql database to use with this project.
 
 Hope you Enjoy.
