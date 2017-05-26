@@ -45,7 +45,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButtonIncluir = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
@@ -61,7 +61,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
             }
         });
 
-        jPanel1.setToolTipText("");
+        jPanel.setToolTipText("");
 
         jButtonIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492797966_flat-style-circle-add.png"))); // NOI18N
         jButtonIncluir.setToolTipText("[F2] - Incluir");
@@ -70,6 +70,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
                 jButtonIncluirActionPerformed(evt);
             }
         });
+        jPanel2.add(jButtonIncluir);
 
         jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1493073460_flat-style-circle-save.png"))); // NOI18N
         jButtonSalvar.setToolTipText("[F4] - Salvar");
@@ -78,6 +79,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
                 jButtonSalvarActionPerformed(evt);
             }
         });
+        jPanel2.add(jButtonSalvar);
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798125_flat-style-circle-undo.png"))); // NOI18N
         jButtonCancelar.setToolTipText("[F5] - Cancelar");
@@ -86,6 +88,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
                 jButtonCancelarActionPerformed(evt);
             }
         });
+        jPanel2.add(jButtonCancelar);
 
         jButtonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798109_flat-style-circle-delete-trash.png"))); // NOI18N
         jButtonExcluir.setToolTipText("[F8] - Excluir");
@@ -94,6 +97,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
                 jButtonExcluirActionPerformed(evt);
             }
         });
+        jPanel2.add(jButtonExcluir);
 
         jButtonPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1492798187_circle-edit-search.png"))); // NOI18N
         jButtonPesquisar.setToolTipText("[F6] - Pesquisar");
@@ -102,38 +106,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
                 jButtonPesquisarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonIncluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonSalvar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonExcluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonPesquisar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButtonPesquisar)
-                        .addComponent(jButtonExcluir))
-                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonSalvar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonIncluir, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(20, 20, 20))
-        );
-
+        jPanel2.add(jButtonPesquisar);
         jButtonPesquisar.getAccessibleContext().setAccessibleName("Pesquisar");
         jButtonPesquisar.getAccessibleContext().setAccessibleDescription("Pesquisar registros");
 
@@ -145,33 +118,34 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
         );
         jPaneCamposLayout.setVerticalGroup(
             jPaneCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 347, Short.MAX_VALUE)
+            .addGap(0, 351, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
+        jPanel.setLayout(jPanelLayout);
+        jPanelLayout.setHorizontalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPaneCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelLayout.setVerticalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
                 .addComponent(jPaneCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 424, Short.MAX_VALUE)
         );
 
         pack();
@@ -244,13 +218,14 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
     public javax.swing.JButton jButtonPesquisar;
     public javax.swing.JButton jButtonSalvar;
     public javax.swing.JPanel jPaneCampos;
-    private javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public Object pesquisar() {
         Template.id = null;
+        controlaBotoesAIncluir();
         
         Pesquisa janela = new Pesquisa(classe);
         janela.setModal(true);
@@ -278,6 +253,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
     public void excluir() {
         isNovo = false;
         PopularListaDeRegistros();
+        Generica.Limpar_Campos_Tela(jPaneCampos,true);
         
         controlaBotoesAIncluir();
     }

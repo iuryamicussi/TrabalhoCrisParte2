@@ -20,7 +20,7 @@ public class DAOProduto {
     public void armazenar(Produto produto) {
  
 
-        Session session = DAOHibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = DAOHibernateUtil.getSession();
  
         try {
  
@@ -37,7 +37,7 @@ public class DAOProduto {
  
     public void alterar(Produto produto) {
  
-        Session session = DAOHibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = DAOHibernateUtil.getSession();
  
         try {
  
@@ -54,7 +54,7 @@ public class DAOProduto {
  
     public void excluir(Produto produto) {
  
-        Session session = DAOHibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = DAOHibernateUtil.getSession();
  
         try {
  
@@ -70,10 +70,9 @@ public class DAOProduto {
     }
  
     public List listar() {
-        Session session = DAOHibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = DAOHibernateUtil.getSession();
         List listaProdutos = null;
         try {
- 
             session.beginTransaction();           
             listaProdutos = session.createQuery("From Produto").list();
         } catch (Exception ex) {

@@ -130,23 +130,23 @@ public class Produto implements java.io.Serializable {
     }
 
     public void armazenar() {
-        DAOProduto dAOCliente = new DAOProduto();
-        dAOCliente.armazenar(this);
+        DAOProduto daoProduto = new DAOProduto();
+        daoProduto.armazenar(this);
     }
 
     public void alterar() {
-        DAOProduto dAOCliente = new DAOProduto();
-        dAOCliente.alterar(this);
+        DAOProduto daoProduto = new DAOProduto();
+        daoProduto.alterar(this);
     }
 
     public void excluir() {
-        DAOProduto dAOCliente = new DAOProduto();
-        dAOCliente.excluir(this);
+        DAOProduto daoProduto = new DAOProduto();
+        daoProduto.excluir(this);
     }
 
     public List listar() {
-        DAOProduto dAOCliente = new DAOProduto();
-        return dAOCliente.listar();
+        DAOProduto daoProduto = new DAOProduto();
+        return daoProduto.listar();
     }
 
     public float getEstoqueAtual() {

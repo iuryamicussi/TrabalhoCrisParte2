@@ -5,6 +5,8 @@
  */
 package br.sp.unifae.cris.comp7.model.dao;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
@@ -15,23 +17,61 @@ import org.hibernate.cfg.AnnotationConfiguration;
  * @author iury
  */
 public class DAOHibernateUtil {
-
-    private static final SessionFactory sessionFactory;
     
-    static {
-        try {
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-            sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-            //sessionFactory = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            // Log the exception. 
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
+    protected DAOHibernateUtil(){
+    }
+    
+    /**
+     *
+     * @return 
+     */
+    public static Session getSession(){
+        Session session = (Session) DAOHibernateUtil.session.get();
+        
+        if(session == null || !session.isOpen()){
+            session = sessionFactory.openSession();
+            DAOHibernateUtil.session.set(session);
         }
+        
+        return session;
     }
     
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
+    protected void begin(){
+        getSession().beginTransaction();
     }
+    
+    protected void commit(){
+        getSession().getTransaction().commit();
+    }
+    
+    protected void rollback(){
+        try{
+            getSession().getTransaction().rollback();
+        }
+        catch(HibernateException e){
+            System.out.println("Não foi possível fazer rollback da transação");
+            throw e;
+        }
+        
+        try{
+            getSession().close();
+        }
+        catch(HibernateException e){
+            System.out.println("Não foi possível fazer fechar a sessão");
+            throw e;
+        }
+        
+        DAOHibernateUtil.session.set(null);
+    }
+    
+    public static void close(){
+        getSession().close();
+        DAOHibernateUtil.session.set(null);
+    }
+    
+    private static final ThreadLocal session = new ThreadLocal();
+    
+    public static final SessionFactory sessionFactory = 
+            new AnnotationConfiguration().configure().buildSessionFactory();
+        
 }
