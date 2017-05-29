@@ -6,10 +6,10 @@
 package br.sp.unifae.cris.comp7.utils;
 
 import java.awt.Component;
+import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -59,5 +59,10 @@ public class Generica {
         if(campo == null)
             campo = 0f;
         return (String.valueOf(campo)).replace(".", ",");
+    }
+    
+    public static final ImageIcon iconePesquisaEmTela(){
+        ImageIcon ico = new ImageIcon(Generica.class.getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1495936783_circle-edit-search-thin.png"));
+        return ico;
     }
 }

@@ -9,11 +9,14 @@ import br.sp.unifae.cris.comp7.model.Entrada;
 import br.sp.unifae.cris.comp7.model.Produto;
 import br.sp.unifae.cris.comp7.utils.Generica;
 import br.sp.unifae.cris.comp7.utils.interfaces.ITela;
+import java.awt.Image;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -82,9 +85,13 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
     // <editor-fold defaultstate="collapsed" desc="Métodos Básicos">
     @Override
     public Object pesquisar() {
-        Object retorno = null;
-        retorno = super.pesquisar();
-        PreencherCampos(retorno);
+//        Object retorno = null;
+//        retorno = super.pesquisar();
+//        PreencherCampos(retorno);
+//        return null;
+        JOptionPane.showMessageDialog(null, "jPaneCampos : " + jPaneCampos.getSize() + 
+                " super pane: " + jPanel.getSize() + 
+                " super: " + super.getSize());
         return null;
     }
     
@@ -155,22 +162,47 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
     // <editor-fold defaultstate="collapsed" desc="Métodos da Tela">
     @Override
     public final void DesenharTela() {
-        this.setTitle("Cadastro de Produtos");
+        super.setSize(540,550);
+        
+        this.setTitle("Entrada de Produtos");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
         jLabelEntradaCodigo = new JLabel("Código :");
         jLabelEntradaCodigo.setBounds(20, 20, 60, 20);
         jTextFieldEntradaCodigo = new JTextField("");
-        jTextFieldEntradaCodigo.setBounds(90, 20, 55, 20);
+        jTextFieldEntradaCodigo.setBounds(120, 20, 55, 20);
         jTextFieldEntradaCodigo.setEditable(false);
+        
+        jLabelEntradaValorTotal = new JLabel("Total R$ :");
+        jLabelEntradaValorTotal.setBounds(190, 20, 80, 20);
+        jFormattedTextFieldEntradaValorTotal = new JFormattedTextField(DecimalFormat.getInstance());
+        jFormattedTextFieldEntradaValorTotal.setBounds(280, 20, 120, 20);
+        jFormattedTextFieldEntradaValorTotal.setEditable(false);
 
         jLabelEntradaFornecedor = new JLabel("Fornecedor :");
-        jLabelEntradaFornecedor.setBounds(20, 60, 60, 20);
+        jLabelEntradaFornecedor.setBounds(20, 60, 90, 20);
         jTextFieldEntradaFornecedor = new JTextField("");
-        jTextFieldEntradaFornecedor.setBounds(90, 60, 60, 20);
+        jTextFieldEntradaFornecedor.setBounds(120, 60, 60, 20);
         jTextFieldEntradaFornecedorNome = new JTextField("");
-        jTextFieldEntradaFornecedorNome.setBounds(160, 60, 280, 20);
+        jTextFieldEntradaFornecedorNome.setEditable(false);
+        jTextFieldEntradaFornecedorNome.setBounds(190, 60, 280, 20);
+        jButtonFornecedorPesquisa = new JButton(Generica.iconePesquisaEmTela());
+        jButtonFornecedorPesquisa.setBounds(480, 50, 35, 35);
+        
+        jPanelProdutos = new JPanel();
+        jPanelProdutos.setBorder(BorderFactory.createTitledBorder("Produtos"));
+        jPanelProdutos.setBounds(20,100,500,350);
+        jPanelProdutos.setLayout(new GroupLayout(jPanelProdutos));
+        
+        jLabelProdutoCodigo = new JLabel("Produto :");
+        jLabelProdutoCodigo.setBounds(20,20,80,20);
+        jTextFieldProdutoCodigo = new JTextField();
+        jTextFieldProdutoCodigo.setBounds(110, 20, 60,20);
+        jTextFieldProdutoNome = new JTextField();
+        jTextFieldProdutoNome.setBounds(180,20,180,20);
+        jButtonProdutoPesquisa = new JButton(Generica.iconePesquisaEmTela());
+        jButtonProdutoPesquisa.setBounds(390, 10, 35, 35);
         
 //        jLabelPrecoCusto = new JLabel("Preço Custo :");
 //        jLabelPrecoCusto.setBounds(20, 100, 120, 20);
@@ -222,15 +254,23 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
 //        jPanelEstoque.add(jLabelEstoqueAtual);
 //        jPanelEstoque.add(jFormattedTextFieldEstoqueAtual);
 
-        super.jPanel.setSize(650,1200);
-        this.jPaneCampos.setSize(550, 900);
-
+        jPanelProdutos.add(jLabelProdutoCodigo);
+        jPanelProdutos.add(jTextFieldProdutoCodigo);
+        jPanelProdutos.add(jTextFieldProdutoNome);
+        jPanelProdutos.add(jButtonProdutoPesquisa);
+        
         this.jPaneCampos.add(jLabelEntradaCodigo);
         this.jPaneCampos.add(jTextFieldEntradaCodigo);
+        
+        this.jPaneCampos.add(jLabelEntradaValorTotal);
+        this.jPaneCampos.add(jFormattedTextFieldEntradaValorTotal);
 
         this.jPaneCampos.add(jLabelEntradaFornecedor);
         this.jPaneCampos.add(jTextFieldEntradaFornecedor);
         this.jPaneCampos.add(jTextFieldEntradaFornecedorNome);
+        this.jPaneCampos.add(jButtonFornecedorPesquisa);
+        
+        this.jPaneCampos.add(jPanelProdutos);
 
 //        this.jPaneCampos.add(jLabelPrecoCusto);
 //        this.jPaneCampos.add(jFormattedTextFieldPrecoCusto);
