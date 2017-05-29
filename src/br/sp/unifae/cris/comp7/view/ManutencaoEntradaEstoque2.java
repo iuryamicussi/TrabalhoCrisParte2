@@ -6,24 +6,23 @@
 package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.model.Entrada;
-import br.sp.unifae.cris.comp7.model.Produto;
 import br.sp.unifae.cris.comp7.utils.Generica;
+import br.sp.unifae.cris.comp7.view.acessorios.MenuContextoTabelaListener;
 import br.sp.unifae.cris.comp7.utils.interfaces.ITela;
-import java.awt.Image;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.List;
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -192,7 +191,7 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         
         jPanelProdutos = new JPanel();
         jPanelProdutos.setBorder(BorderFactory.createTitledBorder("Produtos"));
-        jPanelProdutos.setBounds(20,100,500,350);
+        jPanelProdutos.setBounds(20,100,500,330);
         jPanelProdutos.setLayout(new GroupLayout(jPanelProdutos));
         
         jLabelProdutoCodigo = new JLabel("Produto :");
@@ -200,10 +199,10 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         jTextFieldProdutoCodigo = new JTextField();
         jTextFieldProdutoCodigo.setBounds(90, 30, 60,20);
         jTextFieldProdutoNome = new JTextField();
-        jTextFieldProdutoNome.setBounds(160,30,270,20);
+        jTextFieldProdutoNome.setBounds(160,30,280,20);
         jTextFieldProdutoNome.setEditable(false);
         jButtonProdutoPesquisa = new JButton(Generica.iconePesquisaEmTela());
-        jButtonProdutoPesquisa.setBounds(450, 20, 35, 35);
+        jButtonProdutoPesquisa.setBounds(455, 20, 35, 35);
         
         jLabelProdutoQuantidade = new JLabel("Qtde. :");
         jLabelProdutoQuantidade.setBounds(20,80,40,20);
@@ -220,58 +219,31 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         jFormattedTextFieldProdutoValorTotal = new JFormattedTextField(DecimalFormat.getInstance());
         jFormattedTextFieldProdutoValorTotal.setBounds(350,80,100,20);
         
-        jButtonProdutoAdicionar = new JButton(Generica.iconePesquisaEmTela());
-        jButtonProdutoAdicionar.setBounds(460,75,25,25);
+        jButtonProdutoAdicionar = new JButton(Generica.iconeAdicionarEmTela());
+        jButtonProdutoAdicionar.setBounds(460,75,30,30);
         
-//        jLabelPrecoCusto = new JLabel("Preço Custo :");
-//        jLabelPrecoCusto.setBounds(20, 100, 120, 20);
-//        jFormattedTextFieldPrecoCusto = new JFormattedTextField(DecimalFormat.getInstance());
-//        jFormattedTextFieldPrecoCusto.setBounds(130, 100, 80, 20);
-//
-//        jLabelPrecoVenda = new JLabel("Preço Venda :");
-//        jLabelPrecoVenda.setBounds(20, 140, 120, 20);
-//        jFormattedTextFieldPrecoVenda = new JFormattedTextField(DecimalFormat.getInstance());
-//        jFormattedTextFieldPrecoVenda.setBounds(130, 140, 80, 20);
-//
-//        jPanelEstoque = new JPanel();
-//        jPanelEstoque.setBorder(BorderFactory.createTitledBorder("Informações de Estoque"));
-//        jPanelEstoque.setBounds(20, 180, 420, 150);
-//        jPanelEstoque.setLayout(new GroupLayout(jPanelEstoque));
-//
-//        jLabelEstoqueAnterior = new JLabel("Anterior :");
-//        jLabelEstoqueAnterior.setBounds(20, 20, 100, 30);
-//        jFormattedTextFieldEstoqueAnterior = new JFormattedTextField(DecimalFormat.getInstance());
-//        jFormattedTextFieldEstoqueAnterior.setBounds(100, 27, 80, 20);
-//
-//        jLabelEstoqueEntrada = new JLabel("Entradas :");
-//        jLabelEstoqueEntrada.setBounds(20, 60, 100, 30);
-//        jFormattedTextFieldEstoqueEntrada = new JFormattedTextField(DecimalFormat.getInstance());
-//        jFormattedTextFieldEstoqueEntrada.setBounds(100, 65, 80, 20);
-//        jFormattedTextFieldEstoqueEntrada.setEditable(false);
-//
-//        jLabelEstoqueSaida = new JLabel("Saídas :");
-//        jLabelEstoqueSaida.setBounds(220, 60, 100, 30);
-//        jFormattedTextFieldEstoqueSaida = new JFormattedTextField(DecimalFormat.getInstance());
-//        jFormattedTextFieldEstoqueSaida.setBounds(290, 65, 80, 20);
-//        jFormattedTextFieldEstoqueSaida.setEditable(false);
-//
-//        jLabelEstoqueAtual = new JLabel("Atual :");
-//        jLabelEstoqueAtual.setBounds(220, 110, 100, 30);
-//        jFormattedTextFieldEstoqueAtual = new JFormattedTextField(DecimalFormat.getInstance());
-//        jFormattedTextFieldEstoqueAtual.setBounds(290, 115, 80, 20);
-//        jFormattedTextFieldEstoqueAtual.setEditable(false);
-//
-//        jPanelEstoque.add(jLabelEstoqueAnterior);
-//        jPanelEstoque.add(jFormattedTextFieldEstoqueAnterior);
-//
-//        jPanelEstoque.add(jLabelEstoqueEntrada);
-//        jPanelEstoque.add(jFormattedTextFieldEstoqueEntrada);
-//
-//        jPanelEstoque.add(jLabelEstoqueSaida);
-//        jPanelEstoque.add(jFormattedTextFieldEstoqueSaida);
-//
-//        jPanelEstoque.add(jLabelEstoqueAtual);
-//        jPanelEstoque.add(jFormattedTextFieldEstoqueAtual);
+        String[] columns = new String[]{"Item","Produto", "Qtde.","Unit. R$", "Total R$"};
+        Object[][] data = new Object[1][5];
+        data[0][0] = 1;
+        data[0][1] = "1 - Arroz Pileco Nobre III";
+        
+        final Class[] columnClass = new Class[]{Integer.class, String.class, Float.class, Float.class,Float.class};
+        //create table model with data
+        DefaultTableModel model = new DefaultTableModel(data, columns) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return columnClass[columnIndex];
+            }
+        };
+        
+        jTableProdutos = new JTable(model);
+        jTableProdutos.setBounds(20,120,460,200);
+        jTableProdutos.addMouseListener(new MenuContextoTabelaListener());
 
         jPanelProdutos.add(jLabelProdutoCodigo);
         jPanelProdutos.add(jTextFieldProdutoCodigo);
@@ -286,6 +258,10 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         jPanelProdutos.add(jFormattedTextFieldProdutoValorTotal);
         jPanelProdutos.add(jButtonProdutoAdicionar);
         
+        JScrollPane jsp = new JScrollPane(jTableProdutos);
+        jsp.setBounds(20, 120, 460, 200);
+        jPanelProdutos.add(jsp);
+        
         this.jPaneCampos.add(jLabelEntradaCodigo);
         this.jPaneCampos.add(jTextFieldEntradaCodigo);
         
@@ -298,17 +274,6 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         this.jPaneCampos.add(jButtonFornecedorPesquisa);
         
         this.jPaneCampos.add(jPanelProdutos);
-
-//        this.jPaneCampos.add(jLabelPrecoCusto);
-//        this.jPaneCampos.add(jFormattedTextFieldPrecoCusto);
-//
-//        this.jPaneCampos.add(jLabelPrecoVenda);
-//        this.jPaneCampos.add(jFormattedTextFieldPrecoVenda);
-//
-//        this.jPaneCampos.add(jLabelPrecoVenda);
-//        this.jPaneCampos.add(jFormattedTextFieldPrecoVenda);
-//
-//        this.jPaneCampos.add(jPanelEstoque);
     }
 
     @Override

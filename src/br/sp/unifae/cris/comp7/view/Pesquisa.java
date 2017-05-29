@@ -6,12 +6,10 @@
 package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.model.Produto;
-import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -120,7 +118,8 @@ public class Pesquisa extends javax.swing.JDialog {
                 i++;
             }
         }
-        if (lista.size() <= 0 || lista == null) Pesquisa.this.dispose();
+        if (lista.size() <= 0 || lista == null) 
+            Pesquisa.this.dispose();
         final Class[] columnClass = new Class[]{Integer.class, String.class};
         //create table model with data
         DefaultTableModel model = new DefaultTableModel(data, columns) {
@@ -133,8 +132,6 @@ public class Pesquisa extends javax.swing.JDialog {
             public Class<?> getColumnClass(int columnIndex) {
                 return columnClass[columnIndex];
             }
-            
-            
         };
 
         table = new JTable(model);
@@ -142,8 +139,10 @@ public class Pesquisa extends javax.swing.JDialog {
         
         //Evento de doubleClick na Tabela
         table.addMouseListener(new MouseListener() {
+                    @Override
                     public void mouseClicked(MouseEvent e) {
                     }
+                    @Override
                     public void mousePressed(MouseEvent e) {
                         int row = table.rowAtPoint(e.getPoint());
                         int col = table.columnAtPoint(e.getPoint());
@@ -153,10 +152,13 @@ public class Pesquisa extends javax.swing.JDialog {
                             Pesquisa.this.dispose();
                         }
                     }
+                    @Override
                     public void mouseReleased(MouseEvent e) {
                     }
+                    @Override
                     public void mouseEntered(MouseEvent e) {
                     }
+                    @Override
                     public void mouseExited(MouseEvent e) {
                     }
                 });
