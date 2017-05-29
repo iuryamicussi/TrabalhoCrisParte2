@@ -175,9 +175,9 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         jTextFieldEntradaCodigo.setEditable(false);
         
         jLabelEntradaValorTotal = new JLabel("Total R$ :");
-        jLabelEntradaValorTotal.setBounds(190, 20, 80, 20);
+        jLabelEntradaValorTotal.setBounds(290, 20, 60, 20);
         jFormattedTextFieldEntradaValorTotal = new JFormattedTextField(DecimalFormat.getInstance());
-        jFormattedTextFieldEntradaValorTotal.setBounds(280, 20, 120, 20);
+        jFormattedTextFieldEntradaValorTotal.setBounds(350, 20, 120, 20);
         jFormattedTextFieldEntradaValorTotal.setEditable(false);
 
         jLabelEntradaFornecedor = new JLabel("Fornecedor :");
@@ -196,13 +196,32 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         jPanelProdutos.setLayout(new GroupLayout(jPanelProdutos));
         
         jLabelProdutoCodigo = new JLabel("Produto :");
-        jLabelProdutoCodigo.setBounds(20,20,80,20);
+        jLabelProdutoCodigo.setBounds(20,30,80,20);
         jTextFieldProdutoCodigo = new JTextField();
-        jTextFieldProdutoCodigo.setBounds(110, 20, 60,20);
+        jTextFieldProdutoCodigo.setBounds(90, 30, 60,20);
         jTextFieldProdutoNome = new JTextField();
-        jTextFieldProdutoNome.setBounds(180,20,180,20);
+        jTextFieldProdutoNome.setBounds(160,30,270,20);
+        jTextFieldProdutoNome.setEditable(false);
         jButtonProdutoPesquisa = new JButton(Generica.iconePesquisaEmTela());
-        jButtonProdutoPesquisa.setBounds(390, 10, 35, 35);
+        jButtonProdutoPesquisa.setBounds(450, 20, 35, 35);
+        
+        jLabelProdutoQuantidade = new JLabel("Qtde. :");
+        jLabelProdutoQuantidade.setBounds(20,80,40,20);
+        jFormattedTextFieldProdutoQuantidade = new JFormattedTextField(DecimalFormat.getInstance());
+        jFormattedTextFieldProdutoQuantidade.setBounds(70,80,60,20);
+        
+        jLabelProdutoValorUnitario = new JLabel("Unit. R$ :");
+        jLabelProdutoValorUnitario.setBounds(150,80,60,20);
+        jFormattedTextFieldProdutoValorUnitario = new JFormattedTextField(DecimalFormat.getInstance());
+        jFormattedTextFieldProdutoValorUnitario.setBounds(210, 80, 60, 20);
+        
+        jLabelProdutoValorTotal = new JLabel("Total R$ :");
+        jLabelProdutoValorTotal.setBounds(290,80,60,20);
+        jFormattedTextFieldProdutoValorTotal = new JFormattedTextField(DecimalFormat.getInstance());
+        jFormattedTextFieldProdutoValorTotal.setBounds(350,80,100,20);
+        
+        jButtonProdutoAdicionar = new JButton(Generica.iconePesquisaEmTela());
+        jButtonProdutoAdicionar.setBounds(460,75,25,25);
         
 //        jLabelPrecoCusto = new JLabel("Preço Custo :");
 //        jLabelPrecoCusto.setBounds(20, 100, 120, 20);
@@ -258,6 +277,14 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         jPanelProdutos.add(jTextFieldProdutoCodigo);
         jPanelProdutos.add(jTextFieldProdutoNome);
         jPanelProdutos.add(jButtonProdutoPesquisa);
+        
+        jPanelProdutos.add(jLabelProdutoQuantidade);
+        jPanelProdutos.add(jFormattedTextFieldProdutoQuantidade);
+        jPanelProdutos.add(jLabelProdutoValorUnitario);
+        jPanelProdutos.add(jFormattedTextFieldProdutoValorUnitario);
+        jPanelProdutos.add(jLabelProdutoValorTotal);
+        jPanelProdutos.add(jFormattedTextFieldProdutoValorTotal);
+        jPanelProdutos.add(jButtonProdutoAdicionar);
         
         this.jPaneCampos.add(jLabelEntradaCodigo);
         this.jPaneCampos.add(jTextFieldEntradaCodigo);
