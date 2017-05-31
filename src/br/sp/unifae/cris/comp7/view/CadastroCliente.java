@@ -65,6 +65,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        maskedCpfCnpj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maskedCpfCnpjActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -233,6 +238,10 @@ public class CadastroCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void maskedCpfCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maskedCpfCnpjActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maskedCpfCnpjActionPerformed
 
     /**
      * @param args the command line arguments
