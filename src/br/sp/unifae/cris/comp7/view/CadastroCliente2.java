@@ -1,7 +1,9 @@
 package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.model.Cliente;
+import java.awt.event.ActionEvent;
 import java.util.List;
+import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -79,12 +81,30 @@ public class CadastroCliente2 extends Template {
         jLabelEstado = new JLabel("Estado :");
         jLabelEstado.setBounds(20, 140, 60, 20);
         jComboBoxEstado = new JComboBox<>();
-        jComboBoxEstado.setModel(new DefaultComboBoxModel<>(new String [] {"NORA", "EU", "SOU", "FODA", ""}));
+        jComboBoxEstado.setModel(new DefaultComboBoxModel<>(new String [] {"UM", "DOIS", "TRÊS"}));
         jComboBoxEstado.setBounds(90, 140, 350, 20);
         
-        jRadioButtonFisica = new JRadioButton();   
+        jRadioButtonFisica = new JRadioButton("Pessoa Física", true);
+        jRadioButtonFisica.setBounds(90, 190, 120, 80);
+        jRadioButtonFisica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                jRadioButtonJuridica.setSelected(false);
+                jRadioButtonFisica.setSelected(true);
+                jLabelCpfOuCnpj.setText("CPF :");                
+            }
+        });
         
-        jRadioButtonJuridica = new JRadioButton();
+        jRadioButtonJuridica = new JRadioButton("Pessoa Jurídica", false);
+        jRadioButtonJuridica.setBounds(300, 190, 120, 80);
+        jRadioButtonJuridica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                jRadioButtonJuridica.setSelected(true);
+                jRadioButtonFisica.setSelected(false);
+                jLabelCpfOuCnpj.setText("CNPJ :");                
+            }
+        });
 
         this.jPaneCampos.setSize(550, 900);
 
