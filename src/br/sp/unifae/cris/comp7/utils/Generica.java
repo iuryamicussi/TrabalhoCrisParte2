@@ -69,5 +69,5 @@ public class Generica {
     public static final ImageIcon iconeAdicionarEmTela(){
         ImageIcon ico = new ImageIcon(Generica.class.getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1496079222_flat-style-circle-add.png"));
         return ico;
-    }
+    }            
 }

@@ -45,8 +45,8 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/loja?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password"></property>
     <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.connection.password"></property>
     <mapping resource="br/sp/unifae/cris/comp7/model/Venda.hbm.xml"/>
     <mapping resource="br/sp/unifae/cris/comp7/model/Entrada.hbm.xml"/>
     <mapping resource="br/sp/unifae/cris/comp7/model/EntradaProduto.hbm.xml"/>

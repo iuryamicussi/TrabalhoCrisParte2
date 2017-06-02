@@ -22,8 +22,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }
     
     private void personalizacao(){
-        this.setTitle("Loja de Games Iury");
-        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        this.setLocationRelativeTo(null);
+        this.setTitle("Loja de Games Iury");        
     }
 
     /**

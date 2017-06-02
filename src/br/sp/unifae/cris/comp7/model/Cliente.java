@@ -2,7 +2,9 @@ package br.sp.unifae.cris.comp7.model;
 // Generated 01/05/2017 22:04:39 by Hibernate Tools 4.3.1
 
 
+import br.sp.unifae.cris.comp7.model.dao.DAOCliente;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -89,10 +91,26 @@ public class Cliente  implements java.io.Serializable {
     public void setVendas(Set vendas) {
         this.vendas = vendas;
     }
+    
+    public void armazenar() {
+        DAOCliente daoCliente = new DAOCliente();
+        daoCliente.armazenar(this);
+    }
 
+    public void alterar() {
+        DAOCliente daoCliente = new DAOCliente();
+        daoCliente.alterar(this);
+    }
 
+    public void excluir() {
+        DAOCliente daoCliente = new DAOCliente();
+        daoCliente.excluir(this);
+    }
 
-
+    public List listar() {
+        DAOCliente daoCliente = new DAOCliente();
+        return daoCliente.listar();
+    }
 }
 
 
