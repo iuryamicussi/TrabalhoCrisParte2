@@ -5,12 +5,15 @@
  */
 package br.sp.unifae.cris.comp7.view;
 
+import br.sp.unifae.cris.comp7.model.Entrada;
 import br.sp.unifae.cris.comp7.model.Produto;
+import br.sp.unifae.cris.comp7.model.dao.DAOGenerica;
 import br.sp.unifae.cris.comp7.utils.Generica;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -116,6 +119,22 @@ public class Pesquisa extends javax.swing.JDialog {
                 Produto produto = (Produto) it.next();
                 data[i][0] = produto.getId();
                 data[i][1] = produto.getNome();
+                i++;
+            }
+        }
+        else if(classe instanceof Entrada)
+        {
+            lista = new DAOGenerica().listar(
+                    "SELECT 	E.Id, Concat(F.Id,' - ',F.Nome) as 'Fornecedor' " +
+                    "FROM 	entrada E " +
+                    "		Inner Join Fornecedor F on E.fornecedor = F.Id");
+            columns = new String[]{"Código", "Nome"};
+            data = new Object[lista.size()][2];
+            int i =0;
+            for (Iterator it = lista.iterator(); it.hasNext();) {
+                Object[] obj = (Object[]) it.next();
+                data[i][0] = obj[0];
+                data[i][1] = obj[1];
                 i++;
             }
         }

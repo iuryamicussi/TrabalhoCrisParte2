@@ -6,6 +6,7 @@
 package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.model.Entrada;
+import br.sp.unifae.cris.comp7.model.Fornecedor;
 import br.sp.unifae.cris.comp7.utils.Generica;
 import br.sp.unifae.cris.comp7.view.acessorios.MenuContextoTabelaListener;
 import br.sp.unifae.cris.comp7.utils.interfaces.ITela;
@@ -70,93 +71,74 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
     ManutencaoEntradaEstoque2() {
         DesenharTela();
         this.setVisible(true);
-//        PopularListaDeRegistros();
-//        
-//        Object obj = new Entrada();
-//        this.setClasse(obj);
-//        this.setVisible(true);
-//
-//        if (registros.size() > 0)
-//            pesquisar();
-//        else
-//            cancelar();
+        PopularListaDeRegistros();
+        
+        Object obj = new Entrada();
+        this.setClasse(obj);
+        this.setVisible(true);
+
+        if (registros.size() > 0)
+            pesquisar();
+        else
+            cancelar();
     }
     //</editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Métodos Básicos">
     @Override
     public Object pesquisar() {
-//        Object retorno = null;
-//        retorno = super.pesquisar();
-//        PreencherCampos(retorno);
-//        return null;
-        JOptionPane.showMessageDialog(null, "jPaneCampos : " + jPaneCampos.getSize() + 
-                " super pane: " + jPanel.getSize() + 
-                " super: " + super.getSize());
+        Object retorno = null;
+        retorno = super.pesquisar();
+        PreencherCampos(retorno);
         return null;
     }
     
     @Override
     public void excluir(){
-//        Produto produto = new Produto();
-//        try{
-//            produto.setId(Integer.parseInt(jTextFieldCodigo.getText()));
-//            produto.excluir();
-//            super.excluir();
-//        }
-//        catch(Exception ex)
-//        {
-//            JOptionPane.showMessageDialog(null, ex.getMessage());
-//        }
+        Entrada entrada = new Entrada();
+        try{
+            entrada.setId(Integer.parseInt(jTextFieldEntradaCodigo.getText()));
+            entrada.excluir();
+            super.excluir();
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
     
     @Override
     public void salvar(){
         
-//        Produto produto = new Produto();
-//        try{
-//            try{produto.setNome(jTextFieldNome.getText());}
-//            catch(Exception ex){
-//                jTextFieldNome.requestFocus();
-//                throw ex;
-//            }
-//            try{produto.setPrecoCusto(Generica.stringConverterParaFloat(jFormattedTextFieldPrecoCusto.getText()));}
-//            catch(Exception ex){
-//                jFormattedTextFieldPrecoCusto.requestFocus();
-//                throw ex;
-//            }
-//            try{produto.setPrecoVenda(Generica.stringConverterParaFloat(jFormattedTextFieldPrecoVenda.getText()));}
-//            catch(Exception ex){
-//                jFormattedTextFieldPrecoVenda.requestFocus();
-//                throw ex;
-//            }
-//            try{produto.setEstoqueAnterior(Generica.stringConverterParaFloat(jFormattedTextFieldEstoqueAnterior.getText()));}
-//            catch(Exception ex){
-//                jFormattedTextFieldEstoqueAnterior.requestFocus();
-//                throw ex;
-//            }
-//            try{produto.setEstoqueEntrada(Generica.stringConverterParaFloat(jFormattedTextFieldEstoqueEntrada.getText()));}
-//            catch(Exception ex){
-//                jFormattedTextFieldEstoqueEntrada.requestFocus();
-//                throw ex;
-//            }
-//            try{produto.setEstoqueSaida(Generica.stringConverterParaFloat(jFormattedTextFieldEstoqueSaida.getText()));}
-//            catch(Exception ex){
-//                jFormattedTextFieldEstoqueSaida.requestFocus();
-//                throw ex;
-//            }
-//            if(isNovo)
-//                produto.armazenar();
-//            else{
-//                produto.setId(Integer.parseInt(jTextFieldCodigo.getText()));
-//                produto.alterar();
-//            }
-//            super.salvar();
-//        }
-//        catch(Exception ex)
-//        {
-//            JOptionPane.showMessageDialog(null, ex.getMessage());
-//        }
+        Entrada entrada = new Entrada();
+        try{
+            try{
+                Fornecedor fornecedor = new Fornecedor();
+                fornecedor.setId(Integer.parseInt(jTextFieldEntradaFornecedor.getText()));
+                entrada.setFornecedor(fornecedor);
+                entrada.setFornecedor_1(fornecedor.getId());
+            }
+            catch(Exception ex){
+                jTextFieldEntradaFornecedor.requestFocus();
+                throw ex;
+            }
+            try{entrada.setPrecoTotal(Generica.stringConverterParaFloat(jFormattedTextFieldEntradaValorTotal.getText()));}
+            catch(Exception ex){
+                jFormattedTextFieldEntradaValorTotal.requestFocus();
+                throw ex;
+            }
+            if(isNovo)
+                entrada.armazenar();
+            else{
+                entrada.setId(Integer.parseInt(jTextFieldEntradaCodigo.getText()));
+                entrada.alterar();
+            }
+            super.salvar();
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
 // </editor-fold>
     
@@ -232,12 +214,12 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         jButtonProdutoAdicionar.setBounds(460,75,30,30);
         
         String[] columns = new String[]{"Item","Produto", "Qtde.","Unit. R$", "Total R$"};
-        Object[][] data = new Object[1][5];
-        data[0][0] = 1;
-        data[0][1] = "878 - Need for Speed Most Wanted II";
-        data[0][2] = 9999;
-        data[0][3] = 125.99;
-        data[0][4] = 1300000.99;
+        Object[][] data = new Object[0][5];
+//        data[0][0] = 1;
+//        data[0][1] = "878 - Need for Speed Most Wanted II";
+//        data[0][2] = 9999;
+//        data[0][3] = 125.99;
+//        data[0][4] = 1300000.99;
         
         final Class[] columnClass = new Class[]{Integer.class, String.class, Float.class, Float.class,Float.class};
         //create table model with data
@@ -299,14 +281,10 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         for (Iterator it = registros.iterator(); it.hasNext();) {
             entrada = (Entrada) it.next();
             if (entrada.getId().equals(obj)) {
-//                jTextFieldCodigo.setText(produto.getId().toString());
-//                jTextFieldNome.setText(produto.getNome());
-//                jFormattedTextFieldPrecoCusto.setText(Generica.floatConverterParaString(produto.getPrecoCusto()));
-//                jFormattedTextFieldPrecoVenda.setText(Generica.floatConverterParaString(produto.getPrecoVenda()));
-//                jFormattedTextFieldEstoqueAnterior.setText(Generica.floatConverterParaString(produto.getEstoqueAnterior()));
-//                jFormattedTextFieldEstoqueEntrada.setText(Generica.floatConverterParaString(produto.getEstoqueEntrada()));
-//                jFormattedTextFieldEstoqueSaida.setText(Generica.floatConverterParaString(produto.getEstoqueSaida()));
-//                jFormattedTextFieldEstoqueAtual.setText(Generica.floatConverterParaString(produto.getEstoqueAtual()));
+                jTextFieldEntradaCodigo.setText(entrada.getId().toString());
+                jTextFieldEntradaFornecedor.setText((entrada.getFornecedor().getId()).toString());
+                jTextFieldEntradaFornecedorNome.setText(entrada.getFornecedor().getNome());
+                jFormattedTextFieldEntradaValorTotal.setText(Generica.floatConverterParaString(entrada.getPrecoTotal()));
             }
         }
     }
@@ -314,7 +292,7 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
     @Override
     public void PopularListaDeRegistros() {
         Entrada obj = new Entrada();
-//        registros = obj.listar();
+        registros = obj.listar();
     }
     
     private void fornecedorPesquisa(){
