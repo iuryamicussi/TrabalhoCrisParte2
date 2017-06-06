@@ -5,17 +5,22 @@
  */
 package br.sp.unifae.cris.comp7.utils;
 
+import br.sp.unifae.cris.comp7.view.Pesquisa;
 import java.awt.Component;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.TableColumn;
 
 /**
  *
  * @author Administrador
  */
 public class Generica {
+    
+    public static Object globalRetornoPesquisa;
 
     public static void Limpar_Campos_Tela(JPanel tela) {
         for (Component componente : tela.getComponents()) {
@@ -69,5 +74,27 @@ public class Generica {
     public static final ImageIcon iconeAdicionarEmTela(){
         ImageIcon ico = new ImageIcon(Generica.class.getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1496079222_flat-style-circle-add.png"));
         return ico;
+    }
+    
+    public static void setJTableColumnsWidth(JTable table, int tablePreferredWidth,
+        double... percentages) {
+        double total = 0;
+        for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+            total += percentages[i];
+        }
+
+        for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+            TableColumn column = table.getColumnModel().getColumn(i);
+            column.setPreferredWidth((int)
+                    (tablePreferredWidth * (percentages[i] / total)));
+        }
+    }
+    
+    public static Object pesquisaGeral(Object classe){
+        Pesquisa janela = new Pesquisa(classe);
+        janela.setModal(true);
+        janela.setLocationRelativeTo(null);
+        janela.setVisible(true);
+        return null;
     }
 }

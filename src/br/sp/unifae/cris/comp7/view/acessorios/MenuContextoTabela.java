@@ -22,14 +22,16 @@ public class MenuContextoTabela extends JPopupMenu {
     
     public MenuContextoTabela(){
         jMenuItemEditar = new JMenuItem("Editar");
+        jSeparator = new JSeparator();
         //jMenuItemEditar.setAction(event -> actionListener());
         jMenuItemExcluir = new JMenuItem("Excluir");
         add(jMenuItemEditar);
+        add(jSeparator);
         add(jMenuItemExcluir);
     }
 
-    private Action actionListener() {
+    /*private Action actionListener() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
     
 }

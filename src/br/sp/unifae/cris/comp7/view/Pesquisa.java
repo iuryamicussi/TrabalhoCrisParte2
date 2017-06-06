@@ -6,6 +6,7 @@
 package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.model.Produto;
+import br.sp.unifae.cris.comp7.utils.Generica;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Iterator;
@@ -148,7 +149,7 @@ public class Pesquisa extends javax.swing.JDialog {
                         int col = table.columnAtPoint(e.getPoint());
                         if (row < 0 || col < 0) return;
                         if (e.getClickCount() == 2) {
-                            Template.id = table.getModel().getValueAt(row,0);
+                            Generica.globalRetornoPesquisa = table.getModel().getValueAt(row,0);
                             Pesquisa.this.dispose();
                         }
                     }

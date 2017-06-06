@@ -9,6 +9,8 @@ import br.sp.unifae.cris.comp7.model.Entrada;
 import br.sp.unifae.cris.comp7.utils.Generica;
 import br.sp.unifae.cris.comp7.view.acessorios.MenuContextoTabelaListener;
 import br.sp.unifae.cris.comp7.utils.interfaces.ITela;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.List;
@@ -188,6 +190,13 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         jTextFieldEntradaFornecedorNome.setBounds(190, 60, 280, 20);
         jButtonFornecedorPesquisa = new JButton(Generica.iconePesquisaEmTela());
         jButtonFornecedorPesquisa.setBounds(480, 50, 35, 35);
+        jButtonFornecedorPesquisa.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fornecedorPesquisa();
+            }
+        });
         
         jPanelProdutos = new JPanel();
         jPanelProdutos.setBorder(BorderFactory.createTitledBorder("Produtos"));
@@ -225,7 +234,10 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         String[] columns = new String[]{"Item","Produto", "Qtde.","Unit. R$", "Total R$"};
         Object[][] data = new Object[1][5];
         data[0][0] = 1;
-        data[0][1] = "1 - Arroz Pileco Nobre III";
+        data[0][1] = "878 - Need for Speed Most Wanted II";
+        data[0][2] = 9999;
+        data[0][3] = 125.99;
+        data[0][4] = 1300000.99;
         
         final Class[] columnClass = new Class[]{Integer.class, String.class, Float.class, Float.class,Float.class};
         //create table model with data
@@ -243,6 +255,7 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         
         jTableProdutos = new JTable(model);
         jTableProdutos.setBounds(20,120,460,200);
+        Generica.setJTableColumnsWidth(jTableProdutos, 460, 8,50,12.5,12.5,17);
         jTableProdutos.addMouseListener(new MenuContextoTabelaListener());
 
         jPanelProdutos.add(jLabelProdutoCodigo);
@@ -302,6 +315,12 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
     public void PopularListaDeRegistros() {
         Entrada obj = new Entrada();
 //        registros = obj.listar();
+    }
+    
+    private void fornecedorPesquisa(){
+        Object retorno = null;
+        retorno = super.pesquisar();
+        PreencherCampos(retorno);
     }
     // </editor-fold>
 }
