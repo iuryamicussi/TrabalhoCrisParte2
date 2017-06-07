@@ -5,6 +5,7 @@
  */
 package br.sp.unifae.cris.comp7.view;
 
+import br.sp.unifae.cris.comp7.model.Cliente;
 import br.sp.unifae.cris.comp7.model.Produto;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -113,6 +114,18 @@ public class Pesquisa extends javax.swing.JDialog {
             int i =0;
             for (Iterator it = lista.iterator(); it.hasNext();) {
                 Produto produto = (Produto) it.next();
+                data[i][0] = produto.getId();
+                data[i][1] = produto.getNome();
+                i++;
+            }
+        }
+        else if (classe instanceof Cliente){
+            lista = ((Cliente)classe).listar();
+            columns = new String[]{"Código", "Nome"};
+            data = new Object[lista.size()][2];
+            int i =0;
+            for (Iterator it = lista.iterator(); it.hasNext();) {
+                Cliente produto = (Cliente) it.next();
                 data[i][0] = produto.getId();
                 data[i][1] = produto.getNome();
                 i++;
