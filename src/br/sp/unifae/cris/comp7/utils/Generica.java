@@ -8,10 +8,14 @@ package br.sp.unifae.cris.comp7.utils;
 import br.sp.unifae.cris.comp7.view.Pesquisa;
 import java.awt.Component;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JViewport;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 /**
@@ -21,6 +25,7 @@ import javax.swing.table.TableColumn;
 public class Generica {
     
     public static Object globalRetornoPesquisa;
+    public static Object globalRetornoPesquisaAuxiliar;
 
     public static void Limpar_Campos_Tela(JPanel tela) {
         for (Component componente : tela.getComponents()) {
@@ -33,6 +38,14 @@ public class Generica {
             if (componente instanceof JFormattedTextField) {
                 ((JFormattedTextField) componente).setText("");
             }
+            if(componente instanceof JScrollPane){
+                JViewport viewport = ((JScrollPane)componente).getViewport(); 
+                JTable table = (JTable)viewport.getView();
+                
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                model.getDataVector().removeAllElements();
+                model.fireTableDataChanged();
+            }
         }
     }
     
@@ -41,6 +54,16 @@ public class Generica {
             if (componente instanceof JPanel) {
                 Limpar_Campos_Tela((JPanel) componente,bloquear_Componentes);
             }
+            if(componente instanceof JScrollPane){
+                JViewport viewport = ((JScrollPane)componente).getViewport(); 
+                JTable table = (JTable)viewport.getView();
+                
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                model.getDataVector().removeAllElements();
+                model.fireTableDataChanged();
+                
+                table.setEnabled(!bloquear_Componentes);
+            }
             if (componente instanceof JTextField) {
                 ((JTextField) componente).setText("");
                 ((JTextField) componente).setEnabled(!bloquear_Componentes);
@@ -48,6 +71,9 @@ public class Generica {
             if (componente instanceof JFormattedTextField) {
                 ((JFormattedTextField) componente).setText("");
                 ((JFormattedTextField) componente).setEnabled(!bloquear_Componentes);
+            }
+            if(componente instanceof JButton){
+                ((JButton) componente).setEnabled(!bloquear_Componentes);
             }
         }
     }
@@ -90,11 +116,11 @@ public class Generica {
         }
     }
     
-    public static Object pesquisaGeral(Object classe){
+    public static void pesquisaGeral(Object classe){
+        Generica.globalRetornoPesquisa = null;
         Pesquisa janela = new Pesquisa(classe);
         janela.setModal(true);
         janela.setLocationRelativeTo(null);
         janela.setVisible(true);
-        return null;
     }
 }

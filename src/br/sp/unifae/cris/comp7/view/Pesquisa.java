@@ -6,6 +6,7 @@
 package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.model.Entrada;
+import br.sp.unifae.cris.comp7.model.Fornecedor;
 import br.sp.unifae.cris.comp7.model.Produto;
 import br.sp.unifae.cris.comp7.model.dao.DAOGenerica;
 import br.sp.unifae.cris.comp7.utils.Generica;
@@ -13,7 +14,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -122,6 +122,20 @@ public class Pesquisa extends javax.swing.JDialog {
                 i++;
             }
         }
+        else if(classe instanceof Fornecedor){
+            lista = new DAOGenerica().listar(
+                    "SELECT 	F.Id,F.Nome " +
+                    "FROM 	Fornecedor F");
+            columns = new String[]{"Código", "Nome"};
+            data = new Object[lista.size()][2];
+            int i =0;
+            for (Iterator it = lista.iterator(); it.hasNext();) {
+                Object[] obj = (Object[]) it.next();
+                data[i][0] = obj[0];
+                data[i][1] = obj[1];
+                i++;
+            }
+        }
         else if(classe instanceof Entrada)
         {
             lista = new DAOGenerica().listar(
@@ -169,6 +183,7 @@ public class Pesquisa extends javax.swing.JDialog {
                         if (row < 0 || col < 0) return;
                         if (e.getClickCount() == 2) {
                             Generica.globalRetornoPesquisa = table.getModel().getValueAt(row,0);
+                            Generica.globalRetornoPesquisaAuxiliar = table.getModel().getValueAt(row,1);
                             Pesquisa.this.dispose();
                         }
                     }
