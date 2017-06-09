@@ -26,6 +26,13 @@ public class Estado  implements java.io.Serializable {
        this.fornecedors = fornecedors;
        this.clientes = clientes;
     }
+    
+    public Estado(int id, String sigla, String nome)
+    {
+        this.id = id;
+        this.sigla = sigla;
+        this.nome = nome;
+    }
    
     public Integer getId() {
         return this.id;

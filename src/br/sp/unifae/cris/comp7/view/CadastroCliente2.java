@@ -125,7 +125,9 @@ public class CadastroCliente2 extends Template implements ITela{
                 jTextFieldCidade.requestFocus();
                 throw ex;
             }
-            try{cliente.setEstado((Estado)jComboBoxEstado.getSelectedItem());}
+            try{
+                String nomeEstado = (String)jComboBoxEstado.getSelectedItem();
+            }
             catch(Exception ex){
                 throw ex;
             }
@@ -169,6 +171,7 @@ public class CadastroCliente2 extends Template implements ITela{
         jFormattedTextFieldCpnfOuCnpj.setBounds(90, 140, 150, 20);  
         try
         {
+            jFormattedTextFieldCpnfOuCnpj.setText(null);
             jFormattedTextFieldCpnfOuCnpj.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("###.###.###-##")));
         }
         catch(java.text.ParseException ex)
@@ -186,7 +189,8 @@ public class CadastroCliente2 extends Template implements ITela{
                 jLabelCpfOuCnpj.setText("CPF :");                
                 jFormattedTextFieldCpnfOuCnpj.grabFocus();
                 try
-                {
+                {                   
+                    jFormattedTextFieldCpnfOuCnpj.setText(null);
                     jFormattedTextFieldCpnfOuCnpj.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("###.###.###-##")));
                 }
                 catch(java.text.ParseException ex)
@@ -206,8 +210,10 @@ public class CadastroCliente2 extends Template implements ITela{
                 jLabelCpfOuCnpj.setText("CNPJ :");                
                 jFormattedTextFieldCpnfOuCnpj.grabFocus();
                 try
-                {
-                    jFormattedTextFieldCpnfOuCnpj.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##.###.###/####-##")));
+                {                    
+                    jFormattedTextFieldCpnfOuCnpj.setText(null);
+                    jFormattedTextFieldCpnfOuCnpj.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##.###.###/####-##")));  
+                    jFormattedTextFieldCpnfOuCnpj.setText(null);
                 }
                 catch(java.text.ParseException ex)
                 {
@@ -230,6 +236,7 @@ public class CadastroCliente2 extends Template implements ITela{
         jLabelEstado.setBounds(20, 260, 60, 20);
         jComboBoxEstado = new JComboBox<>();
         jComboBoxEstado.setModel(new DefaultComboBoxModel<>(new String [] {"ACRE", "ALAGOAS", "AMAPA", "AMAZONAS", "BAHIA", "CEARA", "DISTRITO FEDERAL", "ESPIRITO SANTO", "GOIAS", "MARANHAO", "MATO GROSSO", "MATO GROSSO DO SUL", "MINAS GERAIS", "PARA", "PARAIBA", "PARANA", "PERNAMBUCO", "PIAUI", "RIO DE JANEIRO", "RIO GRANDE DO NORTE", "RIO GRANDE DO SUL", "RONDONIA", "RORAIMA", "SANTA CATARINA", "SAO PAULO", "SERGIPE", "TOCANTINS", " " }));
+        
         jComboBoxEstado.setBounds(90, 260, 250, 20);       
 
         this.jPaneCampos.setSize(550, 900);
@@ -268,11 +275,38 @@ public class CadastroCliente2 extends Template implements ITela{
             cliente = (Cliente) it.next();
             if (cliente.getId().equals(obj)) {
                 jTextFieldCodigo.setText(cliente.getId().toString());
-                jTextFieldNome.setText(cliente.getNome());
+                jTextFieldNome.setText(cliente.getNome());               
+                
+                if(cliente.getCpfOuCnpj().length() == 18)
+                {
+                    jRadioButtonFisica.setSelected(false);
+                    jRadioButtonJuridica.setSelected(true);
+                    try
+                    {
+                        jFormattedTextFieldCpnfOuCnpj.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##.###.###/####-##")));
+                    }
+                    catch(java.text.ParseException ex)
+                    {
+                        ex.printStackTrace();
+                    }                       
+                }
+                else
+                {
+                    jRadioButtonFisica.setSelected(true);
+                    jRadioButtonJuridica.setSelected(false);
+                    try
+                    {
+                        jFormattedTextFieldCpnfOuCnpj.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("###.###.###-##")));
+                    }
+                    catch(java.text.ParseException ex)
+                    {
+                        ex.printStackTrace();
+                    } 
+                }
                 jFormattedTextFieldCpnfOuCnpj.setText(cliente.getCpfOuCnpj());
                 jTextFieldEndereco.setText(cliente.getEndereco());
                 jTextFieldCidade.setText(cliente.getCidade());
-                jComboBoxEstado.setSelectedItem(cliente.getEstado());              
+                jComboBoxEstado.setSelectedItem(cliente.getEstado());
             }
         }
     }
