@@ -21,7 +21,6 @@ public class DAOGenerica {
         try {
             session.beginTransaction();
             lista = session.createSQLQuery(pesquisa).list();
-            //lista = session.createQuery(pesquisa).list();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }

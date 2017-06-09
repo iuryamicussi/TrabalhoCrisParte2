@@ -7,6 +7,7 @@ package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.model.Entrada;
 import br.sp.unifae.cris.comp7.model.EntradaProduto;
+import br.sp.unifae.cris.comp7.model.EntradaProdutoId;
 import br.sp.unifae.cris.comp7.model.Fornecedor;
 import br.sp.unifae.cris.comp7.model.Produto;
 import br.sp.unifae.cris.comp7.utils.Generica;
@@ -112,6 +113,12 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
     }
     
     @Override
+    public void incluir(){
+        super.incluir();
+        jButtonProdutoAdicionar.setEnabled(!isNovo);
+    }
+    
+    @Override
     public void salvar(){
         
         Entrada entrada = new Entrada();
@@ -131,22 +138,34 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
                 jFormattedTextFieldEntradaValorTotal.requestFocus();
                 throw ex;
             }
-            try{
-                HashSet<EntradaProduto> entradaProdutos = new HashSet<>();
-                DefaultTableModel dtm = (DefaultTableModel) jTableProdutos.getModel();
-                int nRow = dtm.getRowCount(), nCol = dtm.getColumnCount();
-                Object[][] tableData = new Object[nRow][nCol];
-                for (int i = 0 ; i < nRow ; i++){
-                    EntradaProduto entradaProduto = new EntradaProduto();
-                    entradaProduto.setEntrada((Entrada)registros.get(index));
+            
+            if(!isNovo){
+                try{
+                    HashSet<EntradaProduto> entradaProdutos = new HashSet<>();
+                    DefaultTableModel dtm = (DefaultTableModel) jTableProdutos.getModel();
+                    int nRow = dtm.getRowCount();
+                    for (int i = 0 ; i < nRow ; i++){
+                        EntradaProduto entradaProduto = new EntradaProduto();
+                        Entrada entradaAux = new Entrada();
+                        entradaAux.setId(index);
+                        entradaProduto.setEntrada(entradaAux);
+                        entradaProduto.setId(new EntradaProdutoId(index,Integer.parseInt(dtm.getValueAt(i, 0).toString())));
+                        Produto produto = new Produto();
+                        produto.setId(somenteIdProduto(dtm.getValueAt(i, 1).toString()));
+                        entradaProduto.setProduto(produto);
+                        entradaProduto.setPreco(Float.parseFloat(dtm.getValueAt(i, 3).toString()));
+                        entradaProduto.setQuantidade(Float.parseFloat(dtm.getValueAt(i, 4).toString()));
+
+                        entradaProdutos.add(entradaProduto);
+                    }
+
+                    entrada.setEntradaProdutos(entradaProdutos);
                 }
-//                    for (int j = 0 ; j < nCol ; j++)
-//                        tableData[i][j] = dtm.getValueAt(i,j);
-                entrada.setEntradaProdutos(entradaProdutos);
+                catch(Exception ex){
+                    throw ex;
+                }
             }
-            catch(Exception ex){
-                throw ex;
-            }
+            
             if(isNovo)
                 entrada.armazenar();
             else{
@@ -364,5 +383,10 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         jFormattedTextFieldProdutoValorUnitario.setText("");
         jFormattedTextFieldProdutoValorTotal.setText("");
     }
+    
+    private Integer somenteIdProduto(String produto) {
+        return Integer.parseInt(produto.substring(0, produto.indexOf("-")).trim());
+    }
     // </editor-fold>
+
 }

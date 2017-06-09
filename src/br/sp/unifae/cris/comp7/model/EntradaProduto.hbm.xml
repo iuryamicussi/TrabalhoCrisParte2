@@ -12,7 +12,7 @@
                 <column name="item" />
             </key-property>
         </composite-id>
-        <many-to-one name="entrada" class="br.sp.unifae.cris.comp7.model.Entrada" update="false" insert="false" fetch="select">
+        <many-to-one name="entrada" class="br.sp.unifae.cris.comp7.model.Entrada" cascade="all" update="false" insert="false" fetch="select">
             <column name="id_entrada" not-null="true" />
         </many-to-one>
         <many-to-one name="produto" class="br.sp.unifae.cris.comp7.model.Produto" fetch="select">
