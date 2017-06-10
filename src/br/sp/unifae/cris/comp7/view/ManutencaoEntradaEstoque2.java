@@ -6,10 +6,17 @@
 package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.model.Entrada;
+import br.sp.unifae.cris.comp7.model.EntradaProduto;
+import br.sp.unifae.cris.comp7.model.EntradaProdutoId;
+import br.sp.unifae.cris.comp7.model.Fornecedor;
+import br.sp.unifae.cris.comp7.model.Produto;
 import br.sp.unifae.cris.comp7.utils.Generica;
 import br.sp.unifae.cris.comp7.view.acessorios.MenuContextoTabelaListener;
 import br.sp.unifae.cris.comp7.utils.interfaces.ITela;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -32,6 +39,7 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
     
     //<editor-fold defaultstate="collapsed" desc="Variáveis e Campos da Tela">
     private List registros = null;
+    private int index = -1;
 
     JLabel jLabelEntradaCodigo;
     JLabel jLabelEntradaFornecedor;
@@ -68,93 +76,108 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
     ManutencaoEntradaEstoque2() {
         DesenharTela();
         this.setVisible(true);
-//        PopularListaDeRegistros();
-//        
-//        Object obj = new Entrada();
-//        this.setClasse(obj);
-//        this.setVisible(true);
-//
-//        if (registros.size() > 0)
-//            pesquisar();
-//        else
-//            cancelar();
+        PopularListaDeRegistros();
+        
+        Object obj = new Entrada();
+        this.setClasse(obj);
+        this.setVisible(true);
+
+        if (registros.size() > 0)
+            pesquisar();
+        else
+            cancelar();
     }
     //</editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Métodos Básicos">
     @Override
     public Object pesquisar() {
-//        Object retorno = null;
-//        retorno = super.pesquisar();
-//        PreencherCampos(retorno);
-//        return null;
-        JOptionPane.showMessageDialog(null, "jPaneCampos : " + jPaneCampos.getSize() + 
-                " super pane: " + jPanel.getSize() + 
-                " super: " + super.getSize());
+        Object retorno = null;
+        retorno = super.pesquisar();
+        PreencherCampos(retorno);
         return null;
     }
     
     @Override
     public void excluir(){
-//        Produto produto = new Produto();
-//        try{
-//            produto.setId(Integer.parseInt(jTextFieldCodigo.getText()));
-//            produto.excluir();
-//            super.excluir();
-//        }
-//        catch(Exception ex)
-//        {
-//            JOptionPane.showMessageDialog(null, ex.getMessage());
-//        }
+        Entrada entrada = new Entrada();
+        try{
+            entrada.setId(Integer.parseInt(jTextFieldEntradaCodigo.getText()));
+            entrada.excluir();
+            super.excluir();
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+    @Override
+    public void incluir(){
+        super.incluir();
+        jButtonProdutoAdicionar.setEnabled(!isNovo);
     }
     
     @Override
     public void salvar(){
         
-//        Produto produto = new Produto();
-//        try{
-//            try{produto.setNome(jTextFieldNome.getText());}
-//            catch(Exception ex){
-//                jTextFieldNome.requestFocus();
-//                throw ex;
-//            }
-//            try{produto.setPrecoCusto(Generica.stringConverterParaFloat(jFormattedTextFieldPrecoCusto.getText()));}
-//            catch(Exception ex){
-//                jFormattedTextFieldPrecoCusto.requestFocus();
-//                throw ex;
-//            }
-//            try{produto.setPrecoVenda(Generica.stringConverterParaFloat(jFormattedTextFieldPrecoVenda.getText()));}
-//            catch(Exception ex){
-//                jFormattedTextFieldPrecoVenda.requestFocus();
-//                throw ex;
-//            }
-//            try{produto.setEstoqueAnterior(Generica.stringConverterParaFloat(jFormattedTextFieldEstoqueAnterior.getText()));}
-//            catch(Exception ex){
-//                jFormattedTextFieldEstoqueAnterior.requestFocus();
-//                throw ex;
-//            }
-//            try{produto.setEstoqueEntrada(Generica.stringConverterParaFloat(jFormattedTextFieldEstoqueEntrada.getText()));}
-//            catch(Exception ex){
-//                jFormattedTextFieldEstoqueEntrada.requestFocus();
-//                throw ex;
-//            }
-//            try{produto.setEstoqueSaida(Generica.stringConverterParaFloat(jFormattedTextFieldEstoqueSaida.getText()));}
-//            catch(Exception ex){
-//                jFormattedTextFieldEstoqueSaida.requestFocus();
-//                throw ex;
-//            }
-//            if(isNovo)
-//                produto.armazenar();
-//            else{
-//                produto.setId(Integer.parseInt(jTextFieldCodigo.getText()));
-//                produto.alterar();
-//            }
-//            super.salvar();
-//        }
-//        catch(Exception ex)
-//        {
-//            JOptionPane.showMessageDialog(null, ex.getMessage());
-//        }
+        Entrada entrada = new Entrada();
+        try{
+            try{
+                Fornecedor fornecedor = new Fornecedor();
+                fornecedor.setId(Integer.parseInt(jTextFieldEntradaFornecedor.getText()));
+                entrada.setFornecedor(fornecedor);
+                entrada.setFornecedor_1(fornecedor.getId());
+            }
+            catch(Exception ex){
+                jTextFieldEntradaFornecedor.requestFocus();
+                throw ex;
+            }
+            try{entrada.setPrecoTotal(Generica.stringConverterParaFloat(jFormattedTextFieldEntradaValorTotal.getText()));}
+            catch(Exception ex){
+                jFormattedTextFieldEntradaValorTotal.requestFocus();
+                throw ex;
+            }
+            
+            if(!isNovo){
+                try{
+                    HashSet<EntradaProduto> entradaProdutos = new HashSet<>();
+                    DefaultTableModel dtm = (DefaultTableModel) jTableProdutos.getModel();
+                    int nRow = dtm.getRowCount();
+                    for (int i = 0 ; i < nRow ; i++){
+                        EntradaProduto entradaProduto = new EntradaProduto();
+                        Entrada entradaAux = new Entrada();
+                        entradaAux.setId(index);
+                        entradaProduto.setEntrada(entradaAux);
+                        entradaProduto.setId(new EntradaProdutoId(index,Integer.parseInt(dtm.getValueAt(i, 0).toString())));
+                        Produto produto = new Produto();
+                        produto.setId(somenteIdProduto(dtm.getValueAt(i, 1).toString()));
+                        entradaProduto.setProduto(produto);
+                        entradaProduto.setPreco(Float.parseFloat(dtm.getValueAt(i, 3).toString()));
+                        entradaProduto.setQuantidade(Float.parseFloat(dtm.getValueAt(i, 4).toString()));
+
+                        entradaProdutos.add(entradaProduto);
+                    }
+
+                    entrada.setEntradaProdutos(entradaProdutos);
+                }
+                catch(Exception ex){
+                    throw ex;
+                }
+            }
+            
+            if(isNovo)
+                entrada.armazenar();
+            else{
+                entrada.setId(Integer.parseInt(jTextFieldEntradaCodigo.getText()));
+                entrada.alterar();
+            }
+            super.salvar();
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
 // </editor-fold>
     
@@ -188,6 +211,13 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         jTextFieldEntradaFornecedorNome.setBounds(190, 60, 280, 20);
         jButtonFornecedorPesquisa = new JButton(Generica.iconePesquisaEmTela());
         jButtonFornecedorPesquisa.setBounds(480, 50, 35, 35);
+        jButtonFornecedorPesquisa.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fornecedorPesquisa();
+            }
+        });
         
         jPanelProdutos = new JPanel();
         jPanelProdutos.setBorder(BorderFactory.createTitledBorder("Produtos"));
@@ -203,6 +233,13 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         jTextFieldProdutoNome.setEditable(false);
         jButtonProdutoPesquisa = new JButton(Generica.iconePesquisaEmTela());
         jButtonProdutoPesquisa.setBounds(455, 20, 35, 35);
+        jButtonProdutoPesquisa.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                produtoPesquisa();
+            }
+        });
         
         jLabelProdutoQuantidade = new JLabel("Qtde. :");
         jLabelProdutoQuantidade.setBounds(20,80,40,20);
@@ -221,11 +258,21 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         
         jButtonProdutoAdicionar = new JButton(Generica.iconeAdicionarEmTela());
         jButtonProdutoAdicionar.setBounds(460,75,30,30);
+        jButtonProdutoAdicionar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                produtoAdicionar();
+            }
+        });
         
         String[] columns = new String[]{"Item","Produto", "Qtde.","Unit. R$", "Total R$"};
-        Object[][] data = new Object[1][5];
-        data[0][0] = 1;
-        data[0][1] = "1 - Arroz Pileco Nobre III";
+        Object[][] data = new Object[0][5];
+//        data[0][0] = 1;
+//        data[0][1] = "878 - Need for Speed Most Wanted II";
+//        data[0][2] = 9999;
+//        data[0][3] = 125.99;
+//        data[0][4] = 1300000.99;
         
         final Class[] columnClass = new Class[]{Integer.class, String.class, Float.class, Float.class,Float.class};
         //create table model with data
@@ -243,6 +290,7 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         
         jTableProdutos = new JTable(model);
         jTableProdutos.setBounds(20,120,460,200);
+        Generica.setJTableColumnsWidth(jTableProdutos, 460, 8,50,12.5,12.5,17);
         jTableProdutos.addMouseListener(new MenuContextoTabelaListener());
 
         jPanelProdutos.add(jLabelProdutoCodigo);
@@ -278,6 +326,7 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
 
     @Override
     public void PreencherCampos(Object obj) {
+        int contador = 0;
         Entrada entrada;
         Generica.Limpar_Campos_Tela(this.jPaneCampos,obj==null);
         if (obj == null) {
@@ -285,23 +334,59 @@ public class ManutencaoEntradaEstoque2 extends Template implements ITela {
         }
         for (Iterator it = registros.iterator(); it.hasNext();) {
             entrada = (Entrada) it.next();
+            index = contador;
             if (entrada.getId().equals(obj)) {
-//                jTextFieldCodigo.setText(produto.getId().toString());
-//                jTextFieldNome.setText(produto.getNome());
-//                jFormattedTextFieldPrecoCusto.setText(Generica.floatConverterParaString(produto.getPrecoCusto()));
-//                jFormattedTextFieldPrecoVenda.setText(Generica.floatConverterParaString(produto.getPrecoVenda()));
-//                jFormattedTextFieldEstoqueAnterior.setText(Generica.floatConverterParaString(produto.getEstoqueAnterior()));
-//                jFormattedTextFieldEstoqueEntrada.setText(Generica.floatConverterParaString(produto.getEstoqueEntrada()));
-//                jFormattedTextFieldEstoqueSaida.setText(Generica.floatConverterParaString(produto.getEstoqueSaida()));
-//                jFormattedTextFieldEstoqueAtual.setText(Generica.floatConverterParaString(produto.getEstoqueAtual()));
+                jTextFieldEntradaCodigo.setText(entrada.getId().toString());
+                jTextFieldEntradaFornecedor.setText((entrada.getFornecedor().getId()).toString());
+                jTextFieldEntradaFornecedorNome.setText(entrada.getFornecedor().getNome());
+                jFormattedTextFieldEntradaValorTotal.setText(Generica.floatConverterParaString(entrada.getPrecoTotal()));
+                return;
             }
+            contador++;
         }
     }
     
     @Override
     public void PopularListaDeRegistros() {
         Entrada obj = new Entrada();
-//        registros = obj.listar();
+        registros = obj.listar();
+    }
+    
+    private void fornecedorPesquisa(){
+        Generica.pesquisaGeral(new Fornecedor());
+        if(Generica.globalRetornoPesquisa!= null){
+            jTextFieldEntradaFornecedor.setText(Generica.globalRetornoPesquisa.toString());
+            jTextFieldEntradaFornecedorNome.setText(Generica.globalRetornoPesquisaAuxiliar.toString());
+        }
+    }
+    
+    private void produtoPesquisa(){
+        Generica.pesquisaGeral(new Produto());
+        if(Generica.globalRetornoPesquisa!= null){
+            jTextFieldProdutoCodigo.setText(Generica.globalRetornoPesquisa.toString());
+            jTextFieldProdutoNome.setText(Generica.globalRetornoPesquisaAuxiliar.toString());
+        }
+    }
+    
+    private void produtoAdicionar(){
+        DefaultTableModel model = (DefaultTableModel) jTableProdutos.getModel();
+        model.addRow(new Object[]{
+            model.getRowCount()+1,
+            jTextFieldProdutoCodigo.getText() + " - " + jTextFieldProdutoNome.getText(),
+            Generica.stringConverterParaFloat(jFormattedTextFieldProdutoQuantidade.getText()),
+            Generica.stringConverterParaFloat(jFormattedTextFieldProdutoValorUnitario.getText()),
+            Generica.stringConverterParaFloat(jFormattedTextFieldProdutoValorTotal.getText())});
+        
+        jTextFieldProdutoCodigo.setText("");
+        jTextFieldProdutoNome.setText("");
+        jFormattedTextFieldProdutoQuantidade.setText("");
+        jFormattedTextFieldProdutoValorUnitario.setText("");
+        jFormattedTextFieldProdutoValorTotal.setText("");
+    }
+    
+    private Integer somenteIdProduto(String produto) {
+        return Integer.parseInt(produto.substring(0, produto.indexOf("-")).trim());
     }
     // </editor-fold>
+
 }

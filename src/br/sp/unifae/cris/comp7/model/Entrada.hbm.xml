@@ -10,7 +10,7 @@
                 <param name="property">fornecedor</param>
             </generator>
         </id>
-        <one-to-one name="fornecedor" class="br.sp.unifae.cris.comp7.model.Fornecedor" constrained="true"></one-to-one>
+        <one-to-one name="fornecedor" class="br.sp.unifae.cris.comp7.model.Fornecedor" constrained="true" lazy="false" fetch="join"></one-to-one>
         <property name="fornecedor_1" type="java.lang.Integer">
             <column name="fornecedor" />
         </property>

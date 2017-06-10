@@ -6,7 +6,11 @@
 package br.sp.unifae.cris.comp7.view;
 
 import br.sp.unifae.cris.comp7.model.Cliente;
+import br.sp.unifae.cris.comp7.model.Entrada;
+import br.sp.unifae.cris.comp7.model.Fornecedor;
 import br.sp.unifae.cris.comp7.model.Produto;
+import br.sp.unifae.cris.comp7.model.dao.DAOGenerica;
+import br.sp.unifae.cris.comp7.utils.Generica;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Iterator;
@@ -121,6 +125,11 @@ public class Pesquisa extends javax.swing.JDialog {
         }
         else if (classe instanceof Cliente){
             lista = ((Cliente)classe).listar();
+
+        else if(classe instanceof Fornecedor){
+            lista = new DAOGenerica().listar(
+                    "SELECT 	F.Id,F.Nome " +
+                    "FROM 	Fornecedor F");
             columns = new String[]{"Código", "Nome"};
             data = new Object[lista.size()][2];
             int i =0;
@@ -128,6 +137,25 @@ public class Pesquisa extends javax.swing.JDialog {
                 Cliente produto = (Cliente) it.next();
                 data[i][0] = produto.getId();
                 data[i][1] = produto.getNome();
+                Object[] obj = (Object[]) it.next();
+                data[i][0] = obj[0];
+                data[i][1] = obj[1];
+                i++;
+            }
+        }
+        else if(classe instanceof Entrada)
+        {
+            lista = new DAOGenerica().listar(
+                    "SELECT 	E.Id, Concat(F.Id,' - ',F.Nome) as 'Fornecedor' " +
+                    "FROM 	entrada E " +
+                    "		Inner Join Fornecedor F on E.fornecedor = F.Id");
+            columns = new String[]{"Código", "Nome"};
+            data = new Object[lista.size()][2];
+            int i =0;
+            for (Iterator it = lista.iterator(); it.hasNext();) {
+                Object[] obj = (Object[]) it.next();
+                data[i][0] = obj[0];
+                data[i][1] = obj[1];
                 i++;
             }
         }
@@ -161,7 +189,8 @@ public class Pesquisa extends javax.swing.JDialog {
                         int col = table.columnAtPoint(e.getPoint());
                         if (row < 0 || col < 0) return;
                         if (e.getClickCount() == 2) {
-                            Template.id = table.getModel().getValueAt(row,0);
+                            Generica.globalRetornoPesquisa = table.getModel().getValueAt(row,0);
+                            Generica.globalRetornoPesquisaAuxiliar = table.getModel().getValueAt(row,1);
                             Pesquisa.this.dispose();
                         }
                     }

@@ -1,6 +1,10 @@
 package br.sp.unifae.cris.comp7.model;
 // Generated 01/05/2017 22:04:39 by Hibernate Tools 4.3.1
 
+import br.sp.unifae.cris.comp7.model.dao.DAOEntradaProduto;
+import java.util.List;
+
+
 
 
 /**
@@ -18,7 +22,6 @@ public class EntradaProduto  implements java.io.Serializable {
     public EntradaProduto() {
     }
 
-	
     public EntradaProduto(EntradaProdutoId id, Entrada entrada) {
         this.id = id;
         this.entrada = entrada;
@@ -67,6 +70,25 @@ public class EntradaProduto  implements java.io.Serializable {
         this.preco = preco;
     }
 
+    public void armazenar() {
+        DAOEntradaProduto daoEntradaProduto = new DAOEntradaProduto();
+        daoEntradaProduto.armazenar(this);
+    }
+
+    public void alterar() {
+        DAOEntradaProduto daoEntradaProduto = new DAOEntradaProduto();
+        daoEntradaProduto.alterar(this);
+    }
+
+    public void excluir() {
+        DAOEntradaProduto daoEntradaProduto = new DAOEntradaProduto();
+        daoEntradaProduto.excluir(this);
+    }
+
+    public List listar(int id_entrada) {
+        DAOEntradaProduto daoEntradaProduto = new DAOEntradaProduto();
+        return daoEntradaProduto.listar(id_entrada);
+    }
 
 
 
