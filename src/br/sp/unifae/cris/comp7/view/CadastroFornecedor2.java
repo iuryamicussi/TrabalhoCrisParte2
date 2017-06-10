@@ -236,8 +236,7 @@ public class CadastroFornecedor2 extends Template implements ITela{
         
         jLabelEstado = new JLabel("Estado :");
         jLabelEstado.setBounds(20, 260, 60, 20);
-        jComboBoxEstado = new JComboBox<>();
-        
+        jComboBoxEstado = new JComboBox<>();        
         List todosEstados = new Estado().lista();
         String [] estados = new String[todosEstados.size()];
         int j=0;
@@ -317,9 +316,8 @@ public class CadastroFornecedor2 extends Template implements ITela{
                 jFormattedTextFieldCpnfOuCnpj.setText(fornecedor.getCpfOuCnpj());
                 jTextFieldEndereco.setText(fornecedor.getEndereco());
                 jTextFieldCidade.setText(fornecedor.getCidade());
-                Estado estado = fornecedor.getEstado();
+                Estado estado = fornecedor.getEstado();               
                 
-                //jComboBoxEstado.getModel().setSelectedItem(estado.getId());
                 jComboBoxEstado.setSelectedIndex(estado.getId()+1);
             }
         }
