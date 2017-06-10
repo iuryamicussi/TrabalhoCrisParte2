@@ -1,6 +1,12 @@
 package br.sp.unifae.cris.comp7.model;
 // Generated 01/05/2017 22:04:39 by Hibernate Tools 4.3.1
 
+import br.sp.unifae.cris.comp7.model.dao.DAOFornecedor;
+import br.sp.unifae.cris.comp7.utils.excecao.MinhaExcecao;
+import br.sp.unifae.cris.comp7.utils.excecao.TiposDeMinhaExcecao;
+import java.util.List;
+
+
 
 
 /**
@@ -21,21 +27,23 @@ public class Fornecedor  implements java.io.Serializable {
     public Fornecedor() {
     }
 
-    public Fornecedor(Estado estado, String nome, String fisicaOuJuridica, String cpfOuCnpj, String endereco, String cidade, Entrada entrada) {
-       this.estado = estado;
-       this.nome = nome;
-       this.fisicaOuJuridica = fisicaOuJuridica;
-       this.cpfOuCnpj = cpfOuCnpj;
-       this.endereco = endereco;
-       this.cidade = cidade;
-       this.entrada = entrada;
+    public Fornecedor(Estado estado, String nome, String fisicaOuJuridica, String cpfOuCnpj, String endereco, String cidade, Entrada entrada) throws Exception{
+       setEstado(estado);
+       setNome(nome);
+       setFisicaOuJuridica(fisicaOuJuridica);
+       setCpfOuCnpj(cpfOuCnpj);
+       setEndereco(endereco);
+       setCidade(cidade);
+       setEntrada(entrada);
     }
    
     public Integer getId() {
         return this.id;
     }
     
-    public void setId(Integer id) {
+    public void setId(Integer id) throws Exception{
+        if(id < 0)
+            new MinhaExcecao(TiposDeMinhaExcecao.ValorMenorQueZero,"Id");
         this.id = id;
     }
     public Estado getEstado() {
@@ -49,35 +57,50 @@ public class Fornecedor  implements java.io.Serializable {
         return this.nome;
     }
     
-    public void setNome(String nome) {
+    public void setNome(String nome) throws Exception {
+        if(nome == null || nome.isEmpty() || "".equals(nome)){
+            new MinhaExcecao(TiposDeMinhaExcecao.CampoVazio,"Nome");
+        }
         this.nome = nome;
     }
     public String getFisicaOuJuridica() {
         return this.fisicaOuJuridica;
     }
     
-    public void setFisicaOuJuridica(String fisicaOuJuridica) {
+    public void setFisicaOuJuridica(String fisicaOuJuridica) throws Exception {
+        if(fisicaOuJuridica == null || fisicaOuJuridica.isEmpty() || "".equals(fisicaOuJuridica)){
+            new MinhaExcecao(TiposDeMinhaExcecao.CampoVazio,"Pessoa Fisica ou Juridica");
+        }
         this.fisicaOuJuridica = fisicaOuJuridica;
     }
     public String getCpfOuCnpj() {
         return this.cpfOuCnpj;
     }
     
-    public void setCpfOuCnpj(String cpfOuCnpj) {
+    public void setCpfOuCnpj(String cpfOuCnpj) throws Exception {
+        if(cpfOuCnpj == null || cpfOuCnpj.isEmpty() || "".equals(cpfOuCnpj)) {
+            new MinhaExcecao(TiposDeMinhaExcecao.CampoVazio,"CPF ou CNPJ");
+        }
         this.cpfOuCnpj = cpfOuCnpj;
     }
     public String getEndereco() {
         return this.endereco;
     }
     
-    public void setEndereco(String endereco) {
+    public void setEndereco(String endereco) throws Exception {
+        if(endereco == null || endereco.isEmpty() || "".equals(endereco)){
+            new MinhaExcecao(TiposDeMinhaExcecao.CampoVazio, "Endereco");
+        }
         this.endereco = endereco;
     }
     public String getCidade() {
         return this.cidade;
     }
     
-    public void setCidade(String cidade) {
+    public void setCidade(String cidade) throws Exception {
+        if(cidade == null || cidade.isEmpty() || "".equals(cidade)){
+            new MinhaExcecao(TiposDeMinhaExcecao.CampoVazio, "Cidade");
+        }
         this.cidade = cidade;
     }
     public Entrada getEntrada() {
@@ -86,6 +109,26 @@ public class Fornecedor  implements java.io.Serializable {
     
     public void setEntrada(Entrada entrada) {
         this.entrada = entrada;
+    }
+    
+    public void armazenar() {
+        DAOFornecedor daoFornecedor = new DAOFornecedor();
+        daoFornecedor.armazenar(this);
+    }
+
+    public void alterar() {
+        DAOFornecedor daoFornecedor = new DAOFornecedor();
+        daoFornecedor.alterar(this);
+    }
+
+    public void excluir() {
+        DAOFornecedor daoFornecedor = new DAOFornecedor();
+        daoFornecedor.excluir(this);
+    }
+
+    public List listar() {
+        DAOFornecedor daoFornecedor = new DAOFornecedor();
+        return daoFornecedor.listar();
     }
 
 

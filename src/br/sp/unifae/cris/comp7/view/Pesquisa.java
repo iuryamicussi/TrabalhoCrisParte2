@@ -126,7 +126,7 @@ public class Pesquisa extends javax.swing.JDialog {
         else if (classe instanceof Cliente){
             lista = ((Cliente)classe).listar();
 
-        else if(classe instanceof Fornecedor){
+        else if(classe instanceof Fornecedor2){
             lista = new DAOGenerica().listar(
                     "SELECT 	F.Id,F.Nome " +
                     "FROM 	Fornecedor F");
