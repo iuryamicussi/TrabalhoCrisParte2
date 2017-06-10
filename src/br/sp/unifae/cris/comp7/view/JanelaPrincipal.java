@@ -22,8 +22,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }
     
     private void personalizacao(){
-        this.setTitle("Loja de Games Iury");
-        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        this.setLocationRelativeTo(null);
+        this.setTitle("Loja de Games Iury");        
     }
 
     /**
@@ -191,7 +191,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        new CadastroCliente().setVisible(true);
+        new CadastroCliente2().setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed

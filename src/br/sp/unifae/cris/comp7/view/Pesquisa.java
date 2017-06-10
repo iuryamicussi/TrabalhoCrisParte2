@@ -5,6 +5,7 @@
  */
 package br.sp.unifae.cris.comp7.view;
 
+import br.sp.unifae.cris.comp7.model.Cliente;
 import br.sp.unifae.cris.comp7.model.Entrada;
 import br.sp.unifae.cris.comp7.model.Fornecedor;
 import br.sp.unifae.cris.comp7.model.Produto;
@@ -122,6 +123,9 @@ public class Pesquisa extends javax.swing.JDialog {
                 i++;
             }
         }
+        else if (classe instanceof Cliente){
+            lista = ((Cliente)classe).listar();
+
         else if(classe instanceof Fornecedor){
             lista = new DAOGenerica().listar(
                     "SELECT 	F.Id,F.Nome " +
@@ -130,6 +134,9 @@ public class Pesquisa extends javax.swing.JDialog {
             data = new Object[lista.size()][2];
             int i =0;
             for (Iterator it = lista.iterator(); it.hasNext();) {
+                Cliente produto = (Cliente) it.next();
+                data[i][0] = produto.getId();
+                data[i][1] = produto.getNome();
                 Object[] obj = (Object[]) it.next();
                 data[i][0] = obj[0];
                 data[i][1] = obj[1];
