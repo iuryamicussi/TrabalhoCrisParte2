@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 public class Template extends javax.swing.JFrame implements IMetodosBasicosTemplate{
 
     private Object classe = null;
-    public static Object id = null;
+    //public static Object id = null;
     public boolean isNovo = false;
 
     public void setClasse(Object classe) {
@@ -224,7 +224,7 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
 
     @Override
     public Object pesquisar() {
-        Template.id = null;
+        Generica.globalRetornoPesquisa = null;
         controlaBotoesAIncluir();
         
         Pesquisa janela = new Pesquisa(classe);
@@ -233,12 +233,12 @@ public class Template extends javax.swing.JFrame implements IMetodosBasicosTempl
         janela.setVisible(true);
         isNovo = false;
         
-        if(Template.id != null)
+        if(Generica.globalRetornoPesquisa != null)
             controlaBotoesEmAlteracao();
         else
             controlaBotoesAIncluir();
             
-        return Template.id;
+        return Generica.globalRetornoPesquisa;
     }
 
     @Override
