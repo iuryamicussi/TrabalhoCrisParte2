@@ -101,8 +101,6 @@ public class Generica {
         ImageIcon ico = new ImageIcon(Generica.class.getResource("/br/sp/unifae/cris/comp7/utils/imagens/icons/1496079222_flat-style-circle-add.png"));
         return ico;
     }            
-  
-    }
     
     public static void setJTableColumnsWidth(JTable table, int tablePreferredWidth,
         double... percentages) {
