@@ -126,7 +126,9 @@ public class CadastroFornecedor2 extends Template implements ITela{
                 throw ex;
             }
             try{
-                String nomeEstado = (String)jComboBoxEstado.getSelectedItem();
+                Estado estado = new Estado();
+                estado.setId(pegaIdEstado((String)jComboBoxEstado.getSelectedItem()));
+                fornecedor.setEstado(estado);
             }
             catch(Exception ex){
                 throw ex;
@@ -235,7 +237,16 @@ public class CadastroFornecedor2 extends Template implements ITela{
         jLabelEstado = new JLabel("Estado :");
         jLabelEstado.setBounds(20, 260, 60, 20);
         jComboBoxEstado = new JComboBox<>();
-        jComboBoxEstado.setModel(new DefaultComboBoxModel<>(new String [] {"ACRE", "ALAGOAS", "AMAPA", "AMAZONAS", "BAHIA", "CEARA", "DISTRITO FEDERAL", "ESPIRITO SANTO", "GOIAS", "MARANHAO", "MATO GROSSO", "MATO GROSSO DO SUL", "MINAS GERAIS", "PARA", "PARAIBA", "PARANA", "PERNAMBUCO", "PIAUI", "RIO DE JANEIRO", "RIO GRANDE DO NORTE", "RIO GRANDE DO SUL", "RONDONIA", "RORAIMA", "SANTA CATARINA", "SAO PAULO", "SERGIPE", "TOCANTINS", " " }));
+        
+        List todosEstados = new Estado().lista();
+        String [] estados = new String[todosEstados.size()];
+        int j=0;
+        for(Object obj:todosEstados){
+            Estado estado = (Estado)obj;
+            estados[j]= String.valueOf(estado.getId()) + " - " + estado.getNome();
+            j++;
+        }
+        jComboBoxEstado.setModel(new DefaultComboBoxModel<>(estados));
         
         jComboBoxEstado.setBounds(90, 260, 250, 20);       
 
@@ -306,7 +317,10 @@ public class CadastroFornecedor2 extends Template implements ITela{
                 jFormattedTextFieldCpnfOuCnpj.setText(fornecedor.getCpfOuCnpj());
                 jTextFieldEndereco.setText(fornecedor.getEndereco());
                 jTextFieldCidade.setText(fornecedor.getCidade());
-                jComboBoxEstado.setSelectedItem(fornecedor.getEstado());
+                Estado estado = fornecedor.getEstado();
+                
+                //jComboBoxEstado.getModel().setSelectedItem(estado.getId());
+                jComboBoxEstado.setSelectedIndex(estado.getId()+1);
             }
         }
     }
@@ -316,5 +330,9 @@ public class CadastroFornecedor2 extends Template implements ITela{
         Fornecedor obj = new Fornecedor();
         registros = obj.listar();
     }
-    //</editor-fold>    
+    
+    private Integer pegaIdEstado(String string) {
+        return Integer.parseInt(string.substring(0,1).trim());
+    }
 }
+    //</editor-fold>    

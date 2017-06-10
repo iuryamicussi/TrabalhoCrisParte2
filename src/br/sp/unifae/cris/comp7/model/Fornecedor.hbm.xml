@@ -8,7 +8,7 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="estado" class="br.sp.unifae.cris.comp7.model.Estado" fetch="select">
+        <many-to-one name="estado" class="br.sp.unifae.cris.comp7.model.Estado" outer-join="true" lazy="false" fetch="join">
             <column name="estado" />
         </many-to-one>
         <property name="nome" type="string">

@@ -68,7 +68,7 @@ public class DAOFornecedor {
         List listaFornecedor = null;
         try {
             session.beginTransaction();           
-            listaFornecedor = session.createQuery("From fornecedor").list();
+            listaFornecedor = session.createQuery("From Fornecedor").list();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }

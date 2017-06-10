@@ -134,15 +134,13 @@ public class Pesquisa extends javax.swing.JDialog {
             }
         }
         else if(classe instanceof Fornecedor){
-            lista = new DAOGenerica().listar(
-                    "SELECT 	F.Id,F.Nome " +
-                    "FROM 	Fornecedor F");
+            lista = ((Fornecedor)classe).listar();
             data = new Object[lista.size()][2];
             int i =0;
             for (Iterator it = lista.iterator(); it.hasNext();) {
-                Object[] obj = (Object[]) it.next();
-                data[i][0] = obj[0];
-                data[i][1] = obj[1];
+                Fornecedor fornecedor = (Fornecedor) it.next();
+                data[i][0] = fornecedor.getId();
+                data[i][1] = fornecedor.getNome();
                 i++;
             }
         }

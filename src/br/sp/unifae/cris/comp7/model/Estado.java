@@ -2,7 +2,9 @@ package br.sp.unifae.cris.comp7.model;
 // Generated 01/05/2017 22:04:39 by Hibernate Tools 4.3.1
 
 
+import br.sp.unifae.cris.comp7.model.dao.DAOEstado;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -70,7 +72,10 @@ public class Estado  implements java.io.Serializable {
         this.clientes = clientes;
     }
 
-
+    public List lista(){
+        DAOEstado daoEstado = new DAOEstado();
+        return daoEstado.listar();
+    }
 
 
 }
