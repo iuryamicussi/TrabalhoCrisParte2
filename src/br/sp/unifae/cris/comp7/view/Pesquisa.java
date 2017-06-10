@@ -109,11 +109,10 @@ public class Pesquisa extends javax.swing.JDialog {
     private void personalizar(Object classe) {
         
         List lista = null;
-        String[] columns = null;
+        String[] columns = new String[]{"Código", "Nome"};
         Object[][] data = null;
         if (classe instanceof Produto){
             lista = ((Produto)classe).listar();
-            columns = new String[]{"Código", "Nome"};
             data = new Object[lista.size()][2];
             int i =0;
             for (Iterator it = lista.iterator(); it.hasNext();) {
@@ -125,18 +124,22 @@ public class Pesquisa extends javax.swing.JDialog {
         }
         else if (classe instanceof Cliente){
             lista = ((Cliente)classe).listar();
-
-        else if(classe instanceof Fornecedor2){
-            lista = new DAOGenerica().listar(
-                    "SELECT 	F.Id,F.Nome " +
-                    "FROM 	Fornecedor F");
-            columns = new String[]{"Código", "Nome"};
             data = new Object[lista.size()][2];
             int i =0;
             for (Iterator it = lista.iterator(); it.hasNext();) {
-                Cliente produto = (Cliente) it.next();
-                data[i][0] = produto.getId();
-                data[i][1] = produto.getNome();
+                Cliente cliente = (Cliente) it.next();
+                data[i][0] = cliente.getId();
+                data[i][1] = cliente.getNome();
+                i++;
+            }
+        }
+        else if(classe instanceof Fornecedor){
+            lista = new DAOGenerica().listar(
+                    "SELECT 	F.Id,F.Nome " +
+                    "FROM 	Fornecedor F");
+            data = new Object[lista.size()][2];
+            int i =0;
+            for (Iterator it = lista.iterator(); it.hasNext();) {
                 Object[] obj = (Object[]) it.next();
                 data[i][0] = obj[0];
                 data[i][1] = obj[1];
@@ -149,7 +152,6 @@ public class Pesquisa extends javax.swing.JDialog {
                     "SELECT 	E.Id, Concat(F.Id,' - ',F.Nome) as 'Fornecedor' " +
                     "FROM 	entrada E " +
                     "		Inner Join Fornecedor F on E.fornecedor = F.Id");
-            columns = new String[]{"Código", "Nome"};
             data = new Object[lista.size()][2];
             int i =0;
             for (Iterator it = lista.iterator(); it.hasNext();) {
