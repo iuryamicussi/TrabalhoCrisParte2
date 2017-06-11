@@ -152,7 +152,7 @@ public class CadastroFornecedor2 extends Template implements ITela{
     //<editor-fold defaultstate="collapsed" desc="Métodos da Tela">
     @Override
     public final void DesenharTela() {
-        this.setTitle("Cadastro de Cliente");
+        this.setTitle("Cadastro de Fornecedor");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
@@ -318,7 +318,7 @@ public class CadastroFornecedor2 extends Template implements ITela{
                 jTextFieldCidade.setText(fornecedor.getCidade());
                 Estado estado = fornecedor.getEstado();               
                 
-                jComboBoxEstado.setSelectedIndex(estado.getId()+1);
+                jComboBoxEstado.setSelectedIndex(estado.getId()-1);
             }
         }
     }
@@ -330,7 +330,7 @@ public class CadastroFornecedor2 extends Template implements ITela{
     }
     
     private Integer pegaIdEstado(String string) {
-        return Integer.parseInt(string.substring(0,1).trim());
+        return Integer.parseInt(string.substring(0,2).trim());
     }
 }
     //</editor-fold>    

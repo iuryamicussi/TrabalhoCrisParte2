@@ -318,8 +318,8 @@ public class CadastroCliente2 extends Template implements ITela{
                 jTextFieldCidade.setText(cliente.getCidade());
                 jComboBoxEstado.setSelectedItem(cliente.getEstado());
                 Estado estado = cliente.getEstado();               
-                
-                jComboBoxEstado.setSelectedIndex(estado.getId()+1);
+                int id = estado.getId();
+                jComboBoxEstado.setSelectedIndex(id-1);
             }
         }
     }
@@ -332,7 +332,8 @@ public class CadastroCliente2 extends Template implements ITela{
     //</editor-fold>    
     
      private Integer pegaIdEstado(String string) {
-        return Integer.parseInt(string.substring(0,1).trim());
+        int id = Integer.parseInt(string.substring(0,2).trim());
+        return id;
     }
 }
     
