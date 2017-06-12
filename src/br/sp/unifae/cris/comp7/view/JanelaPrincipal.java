@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import org.hibernate.impl.SessionImpl;
 import org.hibernate.jdbc.Work;
@@ -63,7 +64,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -172,13 +174,17 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Sobre");
-        jMenu5.addActionListener(new java.awt.event.ActionListener() {
+        jMenu7.setText("Ajuda");
+
+        jMenuItem5.setText("Sobre");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu5ActionPerformed(evt);
+                jMenuItem5ActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu5);
+        jMenu7.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
 
@@ -205,7 +211,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        new ManutencaoVenda().setVisible(true);
+        JOptionPane.showMessageDialog(null, "Janela em desenvolvimento...");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -219,10 +225,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         new CadastroProduto2();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
-        new Sobre().setVisible(true);
-    }//GEN-LAST:event_jMenu5ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         
@@ -249,14 +251,18 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        new Sobre().setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -264,6 +270,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
